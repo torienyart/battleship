@@ -1,3 +1,4 @@
+require 'rspec'
 require './lib/ship'
 
 
@@ -13,7 +14,7 @@ describe Ship do
 
     end
 
-    xit 'has readable attributes' do
+    it 'has readable attributes' do
 
         cruiser = Ship.new("Cruiser", 3)
 
