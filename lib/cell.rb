@@ -42,11 +42,18 @@ class Cell
     end
 
     def render(boolean = false)
-
-        if @taken_fire == true && @ship == nil
-            @render_state = "M"
-        elsif @taken_fire == false
-            @render_state = "."
+        if boolean == false
+            if @taken_fire == true && @ship == nil
+                @render_state = "M"
+            elsif @taken_fire == false
+                @render_state = "."
+            end
+        elsif boolean == true
+            if @ship != nil
+                @render_state = "S"
+            elsif @ship == nil
+                @render_state = "."
+            end
         end
         @render_state
     end

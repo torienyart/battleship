@@ -64,7 +64,7 @@ describe Cell do
 
     end
     #6
-    xit 'can render with an argument' do
+    it 'can render with an argument' do
         
         cell_2 = Cell.new("C3")
         cruiser = Ship.new("Cruiser", 3)
