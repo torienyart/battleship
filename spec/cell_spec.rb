@@ -25,6 +25,7 @@ describe Cell do
 
     it 'can place a ship' do
 
+        cell = Cell.new("B4")
         cruiser = Ship.new("Cruiser", 3)
         cell.place_ship(cruiser)
 
