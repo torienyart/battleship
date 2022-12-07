@@ -1,4 +1,5 @@
 require './lib/cell'
+require './lib/ship'
 require 'rspec'
 
 describe Cell do
@@ -22,7 +23,7 @@ describe Cell do
 
     end
 
-    xit 'can place a ship' do
+    it 'can place a ship' do
 
         cruiser = Ship.new("Cruiser", 3)
         cell.place_ship(cruiser)
