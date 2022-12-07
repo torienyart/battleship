@@ -32,5 +32,10 @@ class Cell
         end
     end
 
-    
+    def fire_upon
+        @taken_fire = true
+        if @ship != nil
+            @ship.hit
+        end
+    end
 end
