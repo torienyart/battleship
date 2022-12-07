@@ -45,6 +45,10 @@ class Cell
         if boolean == false
             if @taken_fire == true && @ship == nil
                 @render_state = "M"
+            elsif @taken_fire == true && @ship != nil && @ship.sunk? == false
+                @render_state = "H"
+            elsif @taken_fire == true && @ship != nil && @ship.sunk? == true
+                @render_state = "X"
             elsif @taken_fire == false
                 @render_state = "."
             end

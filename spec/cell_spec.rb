@@ -78,7 +78,7 @@ describe Cell do
 
     end
     #7
-    xit 'can render after a hit' do
+    it 'can render after a hit' do
         
         cell_2 = Cell.new("C3")
         cruiser = Ship.new("Cruiser", 3)
