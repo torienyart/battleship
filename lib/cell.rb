@@ -8,6 +8,7 @@ class Cell
         @coordinate = coordinate
         @ship = nil
         @empty = true
+        @taken_fire = false
     end
 
     def empty?
@@ -23,4 +24,13 @@ class Cell
         @empty = false
     end
 
+    def fired_upon?
+        if @taken_fire == false
+            false
+        elsif @taken_fire == true
+            true
+        end
+    end
+
+    
 end

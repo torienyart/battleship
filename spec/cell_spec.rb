@@ -35,7 +35,7 @@ describe Cell do
 
     #Additionally, a cell knows when it has been fired upon. When it is fired upon, the cell’s ship should be damaged if it has one:
 
-    xit 'can adjust fire upon and update ship health' do
+    it 'can adjust fire upon and update ship health' do
 
         cell = Cell.new("B4")
         cruiser = Ship.new("Cruiser", 3)
