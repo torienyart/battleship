@@ -3,7 +3,7 @@ require './lib/ship'
 require 'rspec'
 
 describe Cell do
-
+    #1
     #A Cell object is a single cell on our board. A Cell can either contain a Ship or nothing.
     it 'can initialize new cell object' do
 
@@ -12,7 +12,7 @@ describe Cell do
         expect(cell).to be_an_instance_of(Cell)
 
     end
-
+    #2
     it 'has readable attributes' do
 
         cell = Cell.new("B4")
@@ -22,7 +22,7 @@ describe Cell do
         expect(cell.empty?).to be true
 
     end
-
+    #3
     it 'can place a ship' do
 
         cell = Cell.new("B4")
@@ -34,7 +34,7 @@ describe Cell do
     end
 
     #Additionally, a cell knows when it has been fired upon. When it is fired upon, the cell’s ship should be damaged if it has one:
-
+    #4
     it 'can adjust fire upon and update ship health' do
 
         cell = Cell.new("B4")
@@ -51,11 +51,12 @@ describe Cell do
     end
 
     #Finally, a Cell will have a method called render which returns a String representation of the Cell for when we need to print the board.
-
-
-    xit 'can render a cell as M' do
+    #5
+    it 'can render a cell as M' do
         
         cell_1 = Cell.new("B4")
+        cruiser = Ship.new("Cruiser", 3)
+        cell_1.place_ship(cruiser)
 
         expect(cell_1.render).to eq(".")
 
@@ -64,7 +65,7 @@ describe Cell do
         expect(cell_1.render).to eq("M")
 
     end
-
+    #6
     xit 'can render with an argument' do
         
         cell_2 = Cell.new("C3")
@@ -78,7 +79,7 @@ describe Cell do
         expect(cell_2.render(true)).to eq("S")
 
     end
-
+    #7
     xit 'can render after a hit' do
         
         cell_2 = Cell.new("C3")
