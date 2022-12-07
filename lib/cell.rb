@@ -41,12 +41,12 @@ class Cell
         end
     end
 
-    def render
-        if @taken_fire == true && @ship != nil
+    def render(boolean = false)
+
+        if @taken_fire == true && @ship == nil
             @render_state = "M"
         elsif @taken_fire == false
             @render_state = "."
-# require 'pry'; binding.pry
         end
         @render_state
     end
