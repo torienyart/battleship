@@ -87,8 +87,10 @@ describe Board do
     end 
 
     describe "Overlapping Ships" do
-        it "Does something RENAME!" do
-            #code here
+        it "places ship on board" do
+            board.place(cruiser, ["A1", "A2", "A3"])
+        
+            expect(board.valid_placement?(submarine, ["A1", "B1"])).to eq(false)
         end
     end 
 
