@@ -12,7 +12,7 @@ describe Cell do
 
     end
 
-    xit 'has readable attributes' do
+    it 'has readable attributes' do
 
         cell = Cell.new("B4")
 
