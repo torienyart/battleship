@@ -2,13 +2,15 @@ class Cell
 
     attr_reader :coordinate,
                 :ship,
-                :empty
+                :empty,
+                :taken_fire
 
     def initialize(coordinate)
         @coordinate = coordinate
         @ship = nil
         @empty = true
         @taken_fire = false
+        @render_state = nil
     end
 
     def empty?
@@ -37,5 +39,15 @@ class Cell
         if @ship != nil
             @ship.hit
         end
+    end
+
+    def render
+        if @taken_fire == true && @ship != nil
+            @render_state = "M"
+        elsif @taken_fire == false
+            @render_state = "."
+# require 'pry'; binding.pry
+        end
+        @render_state
     end
 end
