@@ -43,7 +43,7 @@ describe Cell do
 
         expect(cell.fired_upon?).to be false
         
-        cell.fired_upon
+        cell.fire_upon
 
         expect(cell.ship.health).to eq(2)
         expect(cell.fired_upon?).to be true
