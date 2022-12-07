@@ -87,7 +87,7 @@ describe Cell do
         expect(cell_2.render).to eq(".")
 
         cell_2.fire_upon
-
+require 'pry'; binding.pry
         expect(cell_2.render).to eq("H")
         expect(cruiser.sunk?).to be false
         
