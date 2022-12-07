@@ -55,21 +55,18 @@ describe Board do
         end
     end
 
-    describe "Tools for Validation" do
-        it "Does something RENAME!" do
-            #code here
-
-
-        end
-    end 
-
     describe "Placing Ships" do
+        it "can recognize one individual cell" do
+            board.place(cruiser, ["A1", "A2", "A3"])
+
+            expect(cell_1 = board.cells["A1"]).to be_an_instance_of(Cell)
+            expect(cell_2 = board.cells["A2"]).to be_an_instance_of(Cell)
+            expect(cell_3 = board.cells["A3"])..to be_an_instance_of(Cell)
+        end
+        
         it "can place a ship in multiple cells" do
             board.place(cruiser, ["A1", "A2", "A3"])
-            cell_1 = board.cells["A1"]
-            cell_2 = board.cells["A2"]
-            cell_3 = board.cells["A3"] 
-
+        
             expect(cell_1.ship).to eq(cruiser)
             expect(cell_2.ship).to eq(cruiser)
             expect(cell_3.ship).to eq(cruiser)
@@ -87,7 +84,7 @@ describe Board do
     end 
 
     describe "Overlapping Ships" do
-        it "places ship on board" do
+        it "can identify if ship is already on a cell" do
             board.place(cruiser, ["A1", "A2", "A3"])
         
             expect(board.valid_placement?(submarine, ["A1", "B1"])).to eq(false)
@@ -95,8 +92,24 @@ describe Board do
     end 
 
     describe "Rendering the Board" do
-        it "Does something RENAME!" do
-            #code here
+        it "renders a 'string' representation of itself for the other player" do
+            board.place(cruiser, ["A1", "A2", "A3"])    
+
+            expect(board.render).to eq("  1 2 3 4 \n
+                                        A . . . . \n 
+                                        B . . . . \n
+                                        C . . . . \n
+                                        D . . . . \n")
+        end
+
+        it "renders a TRUE 'string' representation of itself for player's own board" do
+            board.place(cruiser, ["A1", "A2", "A3"])    
+
+            expect(board.render(true)).to eq("  1 2 3 4 \n
+                                              A S S S . \n
+                                              B . . . . \n
+                                              C . . . . \n
+                                              D . . . . \n")
         end
     end 
 
