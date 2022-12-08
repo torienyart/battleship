@@ -28,11 +28,19 @@ class Board
     
 
     def valid_placement?(ship, array_of_cells)
-        if array_of_cells.size == ship.length
+        if array_of_cells.size == ship.length 
+            if 
+            elsif
+            end
+            # either first characters need to match OR last characters of coordinate
+            # ship.length == range of cells 
+            # ensure A1 A1 A1 will NOT pass the test
             true
         elsif array_of_cells.size != ship.length
             false
         end
+
+
     end
 
     # def place(ship, [array?])
