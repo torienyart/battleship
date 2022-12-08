@@ -2,7 +2,6 @@ class Board
     attr_reader :board, :cells
 
     def initialize
-        @board = board
         @cells = {
             "A1" => Cell.new("A1"),
             "A2" => Cell.new("A2"),
@@ -28,10 +27,12 @@ class Board
     end
     
 
-    def valid_placement?
-    # split method
-    #string in array
-    # return.value
+    def valid_placement?(ship, array_of_cells)
+        if array_of_cells.size == ship.length
+            true
+        elsif array_of_cells.size != ship.length
+            false
+        end
     end
 
     # def place(ship, [array?])

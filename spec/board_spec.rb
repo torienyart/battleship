@@ -29,7 +29,7 @@ describe Board do
     end 
 
     describe "Validating Placements" do
-        xit "determines if the placement of the ship is on the correct length of cells" do
+        it "determines if the placement of the ship is on the correct length of cells" do
             expect(board.valid_placement?(cruiser, ["A1", "A2"])).to eq(false)
             expect(board.valid_placement?(submarine, ["A2", "A3", "A4"])).to eq(false)
         end
