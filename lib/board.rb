@@ -23,5 +23,19 @@ class Board
         }   
     end
 
+    def valid_coordinate?(location)
+       @cells.include?(location)
+    end
     
+
+    def valid_placement?
+    # split method
+    #string in array
+    # return.value
+    end
+
+    # def place(ship, [array?])
+    # end
+
+
 end

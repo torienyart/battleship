@@ -8,18 +8,18 @@ describe Board do
     let(:cruiser) {Ship.new("Cruiser", 3)}
     let(:submarine) {Ship.new("Submarine", 2)}
 
-    describe "The Cells" do
+    describe "the cells" do
         it "can initialize a new board object" do
             expect(board).to be_an_instance_of(Board)
         end 
 
-        it "has cells" do
+        it "has readable attributes (cells)" do
             expect(board.cells).to be_an_instance_of(Hash)
         end
     end
 
     describe "Validating Coordinates" do
-        xit "can validate a coordinate" do
+        it "can validate a coordinate" do
             expect(board.valid_coordinate?("A1")).to eq(true)
             expect(board.valid_coordinate?("D4")).to eq(true)
             expect(board.valid_coordinate?("A5")).to eq(false)
