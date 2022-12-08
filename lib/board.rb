@@ -27,18 +27,75 @@ class Board
     end
     
 
-    def valid_placement?(ship, array_of_cells)
+    # placements is valid if cells passed are equal to the ship's length
+    # AND [&&] if the cells passed are consecutive(and not diagonal)
+    def valid_placement?(ship, placment_attempt_array)
+        # I know the if method is redundant... how do I NOT use the if method? just line 34?
+        if correct_length? && consecutive_cells?
+            true
+        elsif
+            false
+        end
+    end
+       
+    # ensures the number of cells passed are equal to the length of a ship
+    def correct_length?
         if array_of_cells.size == ship.length 
-            if 
-            elsif
-            end
-            # either first characters need to match OR last characters of coordinate
-            # ship.length == range of cells 
-            # ensure A1 A1 A1 will NOT pass the test
             true
         elsif array_of_cells.size != ship.length
             false
         end
+    end
+            
+
+    def consecutive_cells?
+        Letters = []
+        Numbers = []
+
+        placement_attempt_array.each do |indv_coordinate|
+            Letters << indv_coordinate.index[0]
+            Numbers << indv_coordinate.index[-1]
+
+
+        end
+    end
+
+
+
+        #PseudoCode for Valid Placement Method (try to use "helper methods"):
+            # 1 - the number of cells passed must be equal to the length of a ship
+            # 2 - check if coordinates are consecutive
+                # look at each element of array (use [.each] or [.map] method?)
+                
+                # split each element in half [.split]
+                
+                # put <index0/Letters> in one array AND <index-1/Numbers> into one array
+
+                    # check if Letters Array are all same OR if Number Array are all same
+                    # IF N or [||] L NOT ALL SAME: => false
+
+                    # IF L ARE ALL SAME: 
+                        # N should be consecutive (ie. 1-2-3-) (ie. NOT the same) - need to change to [.to_i] integers
+                            # if N consecutive => true
+                            # if N not consecutive => false
+
+                    # IF N ARE ALL SAME:
+                    # L should be consecutive (A-B-C-) - ?? use [.ord] to see ordinal number of the letters so they can be compaired/ranked??
+                        #if L are consecutive: => true
+                        #if L are NOT consecutive: => false
+
+                    
+
+            # 3 - ensure A1 A1 A1 will NOT pass the test
+
+            # def consecutive_cells
+            # If L are same check #, if # are same check L
+            # need to look at horizonal and vertical order
+            # .uniq to see each element in an array is unique (avoid A1, A1, A1)
+            # if the letter is unique (all As) then check the numbers.
+            # L - group then into an array see if each letter is same IF yes then check order of #s
+            # Numb - check they are same/different && [1,2,3]consecutive
+
 
 
     end
