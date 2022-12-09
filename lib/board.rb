@@ -20,6 +20,7 @@ class Board
             "D3" => Cell.new("D3"),
             "D4" => Cell.new("D4"),
         }   
+
     end
 
     def valid_coordinate?(location)
@@ -105,6 +106,21 @@ class Board
         end
     end
 
+    
+    #Pseudocode for place ship:
+    # take the array of coordinates and the ship instance/object
+    # locate the coordinate's designated board cell_# 
+    # put the ship instance/object as an additional attribute/state to that cell's information?? key-value pair??
+    
+    # ?? cell_1 needs to be an array? to be able to call the coordinate and the ship
+
+    
+    # def place(ship, placement_attempt_array)
+        #add code here
+    # end
+
+
+
 
 end
 
@@ -112,6 +128,10 @@ end
 
 
 
+    #### Mel's code for consecutive_cells? ###
+    
+    # Same code for: valid_placement? method ... except if statement: correct_length? == true && consecutive_cells? == true
+    # Same code for: correct_lenght? method
 
     # def consecutive_cells?
     #     letters = []
