@@ -28,11 +28,14 @@ class Board
     
 
     # placements is valid if cells passed are equal to the ship's length AND [&&] if the cells passed are consecutive(and not diagonal)
-    def valid_placement?(ship, placment_attempt_array)
+    def valid_placement?(ship, placement_attempt_array)
         # I know the if method is redundant... do I just leave the line of text by itself? 
-        if correct_length? && consecutive_cells?
+        @placement_attempt_array = placement_attempt_array
+        @ship = ship
+
+        if correct_length? == true && consecutive_cells? == true
             true
-        elsif
+        else
             false
         end
     end
@@ -40,9 +43,9 @@ class Board
     # ensures the amount of cells passed are equal to the length of a ship
     # How do we call the placement_attempt_array in this helper method? 
     def correct_length?
-        if placement_attempt_array.size == ship.length 
+        if @placement_attempt_array.length == @ship.length 
             true
-        elsif placement_attempt_array.size != ship.length
+        elsif @placement_attempt_array.length != @ship.length
             false
         end
     end
@@ -53,25 +56,27 @@ class Board
         letters = []
         numbers = []
 
-        placement_attempt_array.each do |indv_coordinate|
-            letters << indv_coordinate.index[0] #.ord
-            numbers << indv_coordinate.index[-1] #.to_i
+        @placement_attempt_array.each do |indv_coordinate|
+            letters << indv_coordinate[0] #.index[0] #.ord
+            numbers << indv_coordinate[-1] #.index[-1] #.to_i
+            #what if A22 passes as A2? 
         end
  
+        # a diagonal placement attempt could never pass
         if letters.all? != true || numbers.all? != true
             false
                 
         elsif letters.all? == true
             # maybe I need to order the numbers? => numbers.sort ?
             # again, I'm being redundant with If conditional... do I just leave the line of text by itself?
-            if numbers.each_cons(ship.length.size) == true
+            if numbers.each_cons(@ship.length) == true
                 true
             else
                 false
-        end
+            end
                 
         elsif numbers.all? == true 
-            if letters.each_cons(ship.length.size) == true
+            if letters.each_cons(@ship.length) == true
                 true
             else
                 false
@@ -79,6 +84,7 @@ class Board
         end
     end
 
+    #  require 'pry'; binding.pry
 
 
     #PseudoCode for Valid Placement Method (try to use "helper methods"):
