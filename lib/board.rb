@@ -21,7 +21,7 @@ class Board
             "D4" => Cell.new("D4"),
         }  
          @placement_attempt_array = nil
-         @ship = nil
+         @ships = []
 
     end
 
@@ -33,8 +33,8 @@ class Board
     # placements is valid if cells passed are equal to the ship's length AND [&&] if the cells passed are consecutive(and not diagonal)
     def valid_placement?(ship, placement_attempt_array)
         @placement_attempt_array = placement_attempt_array
-        @ship = ship
-        if unq_cells? == true && correct_length? == true && lined_up? == true && adjacent? == true && overlap? == true
+        @ships << ship
+        if unq_cells? == true && correct_length?(ship) == true && lined_up? == true && adjacent? == true && overlap? == true
             true
         else
             false
@@ -51,11 +51,11 @@ class Board
     end
 
     # ensures the amount of cells passed are equal to the length of a ship
-    def correct_length?
+    def correct_length?(ship)
         # require 'pry'; binding.pry
-        if @placement_attempt_array.size == @ship.length 
+        if @placement_attempt_array.size == ship.length 
             true
-        elsif @placement_attempt_array.size != @ship.length
+        elsif @placement_attempt_array.size != ship.length
             false
         end
     end
@@ -120,6 +120,22 @@ class Board
         end
     end
 
+    def render(boolean = false) #must use puts
+        rendered = "  1 2 3 4 \nA "
+
+        rendered += rendered_cells(boolean)
+
+        rendered.insert(21, "\nB ")
+        rendered.insert(32, "\nC ")
+        rendered.insert(43, "\nD ")
+        rendered.insert(53, " \n")
+    end
+
+    def rendered_cells(boolean)
+        @cells.each_value.map do |cell|
+            cell.render(boolean)
+        end.join(' ')
+    end
 end
 
 
