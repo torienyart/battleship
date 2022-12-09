@@ -49,11 +49,12 @@ describe Board do
         it "can determine a valid placement" do
             expect(board.valid_placement?(submarine, ["A1", "A2"])).to eq(true)
             expect(board.valid_placement?(cruiser, ["B1", "C1", "D1"])).to eq(true)
+            expect(board.valid_placement?(cruiser, ["B1", "C1", "D11"])).to eq(false)
         end
     end
 
     describe "Placing Ships" do
-        xit "can recognize one individual cell" do
+        it "can recognize one individual cell" do
             board.place(cruiser, ["A1", "A2", "A3"])
 
             expect(cell_1 = board.cells["A1"]).to be_an_instance_of(Cell)
@@ -61,15 +62,18 @@ describe Board do
             expect(cell_3 = board.cells["A3"]).to be_an_instance_of(Cell)
         end
         
-        xit "can place a ship in multiple cells" do
+        it "can place a ship in multiple cells" do
             board.place(cruiser, ["A1", "A2", "A3"])
-        
+            cell_1 = board.cells["A1"]
+            cell_2 = board.cells["A2"]
+            cell_3 = board.cells["A3"]
+
             expect(cell_1.ship).to eq(cruiser)
             expect(cell_2.ship).to eq(cruiser)
             expect(cell_3.ship).to eq(cruiser)
         end
 
-        xit "confirms same ship can be in multiple cells at once" do
+        it "confirms same ship can be in multiple cells at once" do
             board.place(cruiser, ["A1", "A2", "A3"])
             cell_1 = board.cells["A1"]
             cell_2 = board.cells["A2"]
@@ -77,11 +81,10 @@ describe Board do
             
             expect(cell_3.ship == cell_2.ship).to eq(true)
         end
-
     end 
 
     describe "Overlapping Ships" do
-        xit "can identify if ship is already on a cell" do
+        it "can identify if ship is already on a cell" do
             board.place(cruiser, ["A1", "A2", "A3"])
         
             expect(board.valid_placement?(submarine, ["A1", "B1"])).to eq(false)
@@ -89,25 +92,28 @@ describe Board do
     end 
 
     describe "Rendering the Board" do
-        xit "renders a 'string' representation of itself for the other player" do
-            board.place(cruiser, ["A1", "A2", "A3"])    
+        it "renders a 'string' representation of itself for the other player" do
+            board.place(cruiser, ["A1", "A2", "A3"])
+            board.place(submarine, ["C3", "D3"])
+            cell_1 = board.cells["A1"]
+            cell_2 = board.cells["A2"]
+            cell_3 = board.cells["A3"] 
+            cell_4 = board.cells["D4"]
+            cell_5 = board.cells["B3"]
 
-            expect(board.render).to eq("  1 2 3 4 \n
-                                        A . . . . \n 
-                                        B . . . . \n
-                                        C . . . . \n
-                                        D . . . . \n")
-        end
+            expect(board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+            expect(board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . S . \nD . . S . \n")
 
-        xit "renders a TRUE 'string' representation of itself for player's own board" do
-            board.place(cruiser, ["A1", "A2", "A3"])    
+            cell_1.fire_upon
+            cell_2.fire_upon
 
-            expect(board.render(true)).to eq("  1 2 3 4 \n
-                                              A S S S . \n
-                                              B . . . . \n
-                                              C . . . . \n
-                                              D . . . . \n")
+            expect(board.render).to eq("  1 2 3 4 \nA H H . . \nB . . . . \nC . . . . \nD . . . . \n")
+
+            cell_4.fire_upon
+            cell_5.fire_upon
+            cell_3.fire_upon
+
+            expect(board.render).to eq("  1 2 3 4 \nA X X X . \nB . . M . \nC . . . . \nD . . . M \n")
         end
     end 
-
 end

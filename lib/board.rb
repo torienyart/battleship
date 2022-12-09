@@ -1,5 +1,5 @@
 class Board
-    attr_reader :board, :cells
+    attr_reader :cells
 
     def initialize
         @cells = {
@@ -19,27 +19,32 @@ class Board
             "D2" => Cell.new("D2"),
             "D3" => Cell.new("D3"),
             "D4" => Cell.new("D4"),
-        }   
+        }  
+         @placement_attempt_array = nil
+         @ships = []
+
     end
 
     def valid_coordinate?(location)
        @cells.include?(location)
     end
     
-
-    # placements is valid if cells passed are equal to the ship's length AND [&&] if the cells passed are consecutive(and not diagonal)
     def valid_placement?(ship, placement_attempt_array)
         @placement_attempt_array = placement_attempt_array
-        @ship = ship
-
-        if unq_cells? == true && correct_length? == true && lined_up? == true && adjacent? == true
+        @ships << ship
+        if check_coord_length == true && unq_cells? == true && correct_length?(ship) == true && lined_up? == true && adjacent? == true && overlap? == true
             true
         else
             false
         end
     end
+
+    def check_coord_length
+        @placement_attempt_array.all? do |coord|
+            coord.length == 2
+        end
+    end
        
-    # ensures no duplicate coordinates are in placement attempt array
     def unq_cells?
         if @placement_attempt_array.uniq.size == @placement_attempt_array.size
             true
@@ -48,16 +53,14 @@ class Board
         end
     end
 
-    # ensures the amount of cells passed are equal to the length of a ship
-    def correct_length?
-        if @placement_attempt_array.size == @ship.length 
+    def correct_length?(ship)
+        if @placement_attempt_array.size == ship.length 
             true
-        elsif @placement_attempt_array.size != @ship.length
+        elsif @placement_attempt_array.size != ship.length
             false
         end
     end
             
-    # ensures the placement attempt elements passed are consecutive
     def cell_first_character
         cell_first_character = @placement_attempt_array.map do |cell|
             cell[0]
@@ -67,7 +70,6 @@ class Board
     def cell_second_character
         cell_second_character = @placement_attempt_array.map do |cell|
             cell[-1]
-            # FUTURE ISSUE: what if A22 passes as A2? 
         end
     end
 
@@ -105,78 +107,32 @@ class Board
         end
     end
 
+    def overlap?
+        @placement_attempt_array.all? do |cell|
+            @cells[cell].empty?
+        end
+    end
 
+    def place(ship, cells)
+        cells.each do |cell|
+            @cells[cell].place_ship(ship)
+        end
+    end
+
+    def render(boolean = false)
+        rendered = "  1 2 3 4 \nA "
+
+        rendered += rendered_cells(boolean)
+
+        rendered.insert(21, "\nB ")
+        rendered.insert(32, "\nC ")
+        rendered.insert(43, "\nD ")
+        rendered.insert(53, " \n")
+    end
+
+    def rendered_cells(boolean)
+        @cells.each_value.map do |cell|
+            cell.render(boolean)
+        end.join(' ')
+    end
 end
-
-
-
-
-
-
-    # def consecutive_cells?
-    #     letters = []
-    #     numbers = []
-
-    #     @placement_attempt_array.each do |indv_coordinate|
-    #         letters << indv_coordinate[0] #.index[0] #.ord
-    #         numbers << indv_coordinate[-1] #.index[-1] #.to_i
-    #         # FUTURE ISSUE: what if A22 passes as A2? 
-    #     end
- 
-    #     # a diagonal placement attempt could never pass
-    #     if letters.all? != true || numbers.all? != true
-    #         false
-                
-    #     elsif letters.all? == true
-    #         # maybe I need to order the numbers? => numbers.sort ?
-    #         if numbers.each_cons(@ship.length) == true
-    #             true
-    #         else
-    #             false
-    #         end
-                
-    #     elsif numbers.all? == true 
-    #         if letters.each_cons(@ship.length) == true
-    #             true
-    #         else
-    #             false
-    #         end    
-    #     end
-    # end
-
-    #  require 'pry'; binding.pry
-
-
-    #PseudoCode for Valid Placement Method (try to use "helper methods"):
-        # 1 - the number of cells passed must be equal to the length of a ship
-        # 2 - check if coordinates are consecutive
-            # look at each element of array (use [.each] or [.map] method?)
-                
-            # SKIP THIS AND SEE NEXT STEP: split each element in half - ?? use the [.split] method? 
-                
-            # put <index0/Letters> in one array AND <index-1/Numbers> into one array
-
-                # check if Letters Array are all same OR if Number Array are all same
-                # IF N or [||] L NOT ALL SAME: => false
-
-                # IF L ARE ALL SAME: 
-                    # N should be consecutive (ie. 1-2-3-) (ie. NOT the same) - need to change to [.to_i] integers
-                        # if N consecutive => true
-                        # if N not consecutive => false
-
-                # IF N ARE ALL SAME:
-                # L should be consecutive (A-B-C-) - ?? use [.ord] to see ordinal number of the letters so they can be compaired/ranked??
-                    #if L are consecutive: => true
-                    #if L are NOT consecutive: => false
-
-            # 3 - ensure A1 A1 A1 will NOT pass the test
-
-    # OLD Pseudocode:
-        # If L are same check #, if # are same check L
-        # need to look at horizonal and vertical order
-        # .uniq to see each element in an array is unique (avoid A1, A1, A1)
-        # if the letter is unique (all As) then check the numbers.
-        # L - group then into an array see if each letter is same IF yes then check order of #s
-        # Numb - check they are same/different && [1,2,3]consecutive
-
-

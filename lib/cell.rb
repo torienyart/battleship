@@ -38,6 +38,8 @@ class Cell
         if @taken_fire == false && @ship != nil
             @ship.hit
             @taken_fire = true
+        elsif @taken_fire == false && @ship == nil
+            @taken_fire = true
         elsif @taken_fire == true
             p "You've already fired at this cell.  Try again" 
         end
