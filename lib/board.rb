@@ -64,6 +64,12 @@ class Board
         end
     end
 
+    def cell_second_character
+        cell_second_character = @placement_attempt_array.map do |cell|
+            cell[-1]
+            # FUTURE ISSUE: what if A22 passes as A2? 
+        end
+    end
 
 
 
