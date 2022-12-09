@@ -74,19 +74,6 @@ describe Board do
     end
 
     describe "Placing Ships" do
-        # xit "can recognize individual cells" do
-        #     expect(cell_1).to eq(board.cells["A1"])
-        #     expect(cell_2).to eq(board.cells["A2"])
-        #     expect(cell_3).to eq(board.cells["A3"])
-        #     # expect(cell_1 = board.cells["A1"]).to be_an_instance_of(Cell)
-        #     # expect(cell_2 = board.cells["A2"]).to be_an_instance_of(Cell)
-        #     # expect(cell_3 = board.cells["A3"]).to be_an_instance_of(Cell)
-        #     expect(cell_1.ship).to eq(cruiser)
-        #     expect(cell_2.ship).to eq(cruiser)
-        #     expect(cell_3.ship).to eq(cruiser)
-        
-        # end
-        
         it "can place a ship in multiple cells" do
             board.place(cruiser, ["A1", "A2", "A3"])
             cell_1 = board.cells["A1"] 
@@ -98,11 +85,11 @@ describe Board do
             expect(cell_3.ship).to eq(cruiser)
         end
 
-        xit "confirms same ship can be in multiple cells at once" do
+        it "confirms same ship can be in multiple cells at once" do
             board.place(cruiser, ["A1", "A2", "A3"])
-            # cell_1 = board.cells["A1"]
-            # cell_2 = board.cells["A2"]
-            # cell_3 = board.cells["A3"] 
+            cell_1 = board.cells["A1"]
+            cell_2 = board.cells["A2"]
+            cell_3 = board.cells["A3"] 
             
             expect(cell_3.ship == cell_2.ship).to eq(true)
         end
