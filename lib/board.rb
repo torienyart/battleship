@@ -104,7 +104,14 @@ class Board
             false
         end
     end
+ 
+    #_______________________________________
 
+    def place(ship, cells)
+        cells.each do |cell|
+            @cells[cell].place_ship(ship)
+        end
+    end
 
 end
 

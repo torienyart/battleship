@@ -53,7 +53,7 @@ describe Board do
     end
 
     describe "Placing Ships" do
-        xit "can recognize one individual cell" do
+        it "can recognize one individual cell" do
             board.place(cruiser, ["A1", "A2", "A3"])
 
             expect(cell_1 = board.cells["A1"]).to be_an_instance_of(Cell)
