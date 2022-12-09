@@ -109,7 +109,7 @@ class Board
     end
 
     def overlap?
-        @placement_attempt_array.any? do |cell|
+        @placement_attempt_array.all? do |cell|
             @cells[cell].empty?
         end
     end
