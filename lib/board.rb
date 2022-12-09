@@ -32,13 +32,23 @@ class Board
         @placement_attempt_array = placement_attempt_array
         @ship = ship
 
-        if correct_length? == true && consecutive_cells? == true
+        if unq_cells? == true && correct_length? == true && consecutive_cells? == true
             true
         else
             false
         end
     end
        
+    # ensures no duplicate coordinates are in placement attempt array
+    def unq_cells?
+        if @placement_attempt_array.uniq.size == @placement_attempt_array.size
+            true
+        else
+            false
+        end
+    end
+
+
     # ensures the amount of cells passed are equal to the length of a ship
     def correct_length?
         if @placement_attempt_array.size == @ship.length 
