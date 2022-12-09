@@ -49,6 +49,7 @@ describe Board do
         it "can determine a valid placement" do
             expect(board.valid_placement?(submarine, ["A1", "A2"])).to eq(true)
             expect(board.valid_placement?(cruiser, ["B1", "C1", "D1"])).to eq(true)
+            expect(board.valid_placement?(cruiser, ["B1", "C1", "D11"])).to eq(false)
         end
     end
 
@@ -80,7 +81,6 @@ describe Board do
             
             expect(cell_3.ship == cell_2.ship).to eq(true)
         end
-
     end 
 
     describe "Overlapping Ships" do
@@ -101,7 +101,6 @@ describe Board do
             cell_4 = board.cells["D4"]
             cell_5 = board.cells["B3"]
 
-
             expect(board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
             expect(board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . S . \nD . . S . \n")
 
@@ -116,8 +115,5 @@ describe Board do
 
             expect(board.render).to eq("  1 2 3 4 \nA X X X . \nB . . M . \nC . . . . \nD . . . M \n")
         end
-
-    
     end 
-
 end
