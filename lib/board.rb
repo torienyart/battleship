@@ -33,7 +33,7 @@ class Board
         @placement_attempt_array = placement_attempt_array
         @ship = ship
 
-        if unq_cells? == true && correct_length? == true && lined_up? == true && adjacent? == true
+        if unq_cells? == true && correct_length? == true && lined_up? == true && adjacent? == true #&& not_overlapping? == true
             true
         else
             false
@@ -106,15 +106,53 @@ class Board
         end
     end
 
-    def place(ship, coordinates)
-        coordinates.each do |coordinate|
-        cells[coordinate].ship = ship
-        end
+    def overlapping?
+
     end
 
 
+    #Place Method 1
 
-end  
+    # def place(ship, coordinates)
+    #     coordinates.each do |coordinate|
+    #     cells[coordinate].ship = ship
+    #     end
+    # end
+
+    #Place Method 2
+
+    def place(ship, coordinates)
+        coordinates.each do |coordinate|
+        cells[coordinate].place_ship(ship)
+        end
+    end
+    # with this method we don't need the attr_acces in cell.rb file!
+
+    # def place(ship, coordinates)
+    #     coordinates.each do |coordinate|
+    #         if cells[coordinate].ship == true
+    #             false
+    #         else
+    #             cells[coordinate].ship = ship
+    #         end
+    #     end
+    # end 
+
+    # def not_overlapping?(coordinates)
+    #     cells.each do |cell|
+    #         if cell[coordinate].ship == ship
+    #             false
+    #             #if cells have ship it IS overlapping so this is false
+    #         # cells[].ship == true
+    #         else 
+    #             true
+    #         end
+    #     end
+    # end
+
+end
+
+ 
     
    # require 'pry'; binding.pry
 
@@ -209,5 +247,4 @@ end
         # if the letter is unique (all As) then check the numbers.
         # L - group then into an array see if each letter is same IF yes then check order of #s
         # Numb - check they are same/different && [1,2,3]consecutive
-
 
