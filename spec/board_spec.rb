@@ -84,7 +84,7 @@ describe Board do
     end 
 
     describe "Overlapping Ships" do
-        xit "can identify if ship is already on a cell" do
+        it "can identify if ship is already on a cell" do
             board.place(cruiser, ["A1", "A2", "A3"])
         
             expect(board.valid_placement?(submarine, ["A1", "B1"])).to eq(false)

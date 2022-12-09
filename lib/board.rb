@@ -1,5 +1,5 @@
 class Board
-    attr_reader :board, :cells
+    attr_reader :cells
 
     def initialize
         @cells = {
@@ -19,7 +19,10 @@ class Board
             "D2" => Cell.new("D2"),
             "D3" => Cell.new("D3"),
             "D4" => Cell.new("D4"),
-        }   
+        }  
+         @placement_attempt_array = nil
+         @ship = nil
+
     end
 
     def valid_coordinate?(location)
@@ -31,8 +34,7 @@ class Board
     def valid_placement?(ship, placement_attempt_array)
         @placement_attempt_array = placement_attempt_array
         @ship = ship
-
-        if unq_cells? == true && correct_length? == true && lined_up? == true && adjacent? == true
+        if unq_cells? == true && correct_length? == true && lined_up? == true && adjacent? == true && overlap? == true
             true
         else
             false
@@ -50,6 +52,7 @@ class Board
 
     # ensures the amount of cells passed are equal to the length of a ship
     def correct_length?
+        # require 'pry'; binding.pry
         if @placement_attempt_array.size == @ship.length 
             true
         elsif @placement_attempt_array.size != @ship.length
@@ -104,8 +107,12 @@ class Board
             false
         end
     end
- 
-    #_______________________________________
+
+    def overlap?
+        @placement_attempt_array.any? do |cell|
+            @cells[cell].empty?
+        end
+    end
 
     def place(ship, cells)
         cells.each do |cell|
