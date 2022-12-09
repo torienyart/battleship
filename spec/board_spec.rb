@@ -72,7 +72,7 @@ describe Board do
             expect(cell_3.ship).to eq(cruiser)
         end
 
-        xit "confirms same ship can be in multiple cells at once" do
+        it "confirms same ship can be in multiple cells at once" do
             board.place(cruiser, ["A1", "A2", "A3"])
             cell_1 = board.cells["A1"]
             cell_2 = board.cells["A2"]
