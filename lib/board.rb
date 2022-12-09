@@ -48,7 +48,6 @@ class Board
         end
     end
 
-
     # ensures the amount of cells passed are equal to the length of a ship
     def correct_length?
         if @placement_attempt_array.size == @ship.length 
@@ -59,36 +58,58 @@ class Board
     end
             
     # ensures the placement attempt elements passed are consecutive
-    def consecutive_cells?
-        letters = []
-        numbers = []
-
-        @placement_attempt_array.each do |indv_coordinate|
-            letters << indv_coordinate[0] #.index[0] #.ord
-            numbers << indv_coordinate[-1] #.index[-1] #.to_i
-            # FUTURE ISSUE: what if A22 passes as A2? 
-        end
- 
-        # a diagonal placement attempt could never pass
-        if letters.all? != true || numbers.all? != true
-            false
-                
-        elsif letters.all? == true
-            # maybe I need to order the numbers? => numbers.sort ?
-            if numbers.each_cons(@ship.length) == true
-                true
-            else
-                false
-            end
-                
-        elsif numbers.all? == true 
-            if letters.each_cons(@ship.length) == true
-                true
-            else
-                false
-            end    
+    def cell_first_character
+        cell_first_character = @placement_attempt_array.map do |cell|
+            cell[0]
         end
     end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # def consecutive_cells?
+    #     letters = []
+    #     numbers = []
+
+    #     @placement_attempt_array.each do |indv_coordinate|
+    #         letters << indv_coordinate[0] #.index[0] #.ord
+    #         numbers << indv_coordinate[-1] #.index[-1] #.to_i
+    #         # FUTURE ISSUE: what if A22 passes as A2? 
+    #     end
+ 
+    #     # a diagonal placement attempt could never pass
+    #     if letters.all? != true || numbers.all? != true
+    #         false
+                
+    #     elsif letters.all? == true
+    #         # maybe I need to order the numbers? => numbers.sort ?
+    #         if numbers.each_cons(@ship.length) == true
+    #             true
+    #         else
+    #             false
+    #         end
+                
+    #     elsif numbers.all? == true 
+    #         if letters.each_cons(@ship.length) == true
+    #             true
+    #         else
+    #             false
+    #         end    
+    #     end
+    # end
 
     #  require 'pry'; binding.pry
 
