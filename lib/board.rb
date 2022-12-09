@@ -71,13 +71,41 @@ class Board
         end
     end
 
+    def lined_up?
+        if cell_first_character.uniq.size == 1 || cell_second_character.uniq.size == 1
+            true
+        else
+            false
+        end
+    end
+
+    def range1_size
+        sorted_f_chars = cell_first_character.sort
+        range1_start = sorted_f_chars.first
+        range1_end = sorted_f_chars.last
+
+        (range1_start .. range1_end).to_a.size 
+    end
+
+    def range2_size
+        sorted_s_chars = cell_second_character.sort
+        range2_start = sorted_s_chars.first
+        range2_end = sorted_s_chars.last
+
+        (range2_start .. range2_end).to_a.size 
+    end
+
+    def adjacent?
+        if range1_size == @placement_attempt_array.size || range2_size == @placement_attempt_array.size
+            true
+        else
+            false
+        end
+    end
 
 
 
-
-
-
-
+    end
 
 
 
