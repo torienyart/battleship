@@ -92,25 +92,32 @@ describe Board do
     end 
 
     describe "Rendering the Board" do
-        xit "renders a 'string' representation of itself for the other player" do
-            board.place(cruiser, ["A1", "A2", "A3"])    
+        it "renders a 'string' representation of itself for the other player" do
+            board.place(cruiser, ["A1", "A2", "A3"])
+            board.place(submarine, ["C3", "D3"])
+            cell_1 = board.cells["A1"]
+            cell_2 = board.cells["A2"]
+            cell_3 = board.cells["A3"] 
+            cell_4 = board.cells["D4"]
+            cell_5 = board.cells["B3"]
 
-            expect(board.render).to eq("  1 2 3 4 \n
-                                        A . . . . \n 
-                                        B . . . . \n
-                                        C . . . . \n
-                                        D . . . . \n")
+
+            expect(board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+            expect(board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . S . \nD . . S . \n")
+
+            cell_1.fire_upon
+            cell_2.fire_upon
+
+            expect(board.render).to eq("  1 2 3 4 \nA H H . . \nB . . . . \nC . . . . \nD . . . . \n")
+
+            cell_4.fire_upon
+            cell_5.fire_upon
+            cell_3.fire_upon
+
+            expect(board.render).to eq("  1 2 3 4 \nA X X X . \nB . . M . \nC . . . . \nD . . . M \n")
         end
 
-        xit "renders a TRUE 'string' representation of itself for player's own board" do
-            board.place(cruiser, ["A1", "A2", "A3"])    
-
-            expect(board.render(true)).to eq("  1 2 3 4 \n
-                                              A S S S . \n
-                                              B . . . . \n
-                                              C . . . . \n
-                                              D . . . . \n")
-        end
+    
     end 
 
 end
