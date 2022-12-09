@@ -31,7 +31,7 @@ class Board
     def valid_placement?(ship, placement_attempt_array)
         @placement_attempt_array = placement_attempt_array
         @ship = ship
-        # require 'pry'; binding.pry - BUG: pry only returning "Cruiser" when asking @ship
+
         if correct_length? == true && consecutive_cells? == true
             true
         else
@@ -41,9 +41,9 @@ class Board
        
     # ensures the amount of cells passed are equal to the length of a ship
     def correct_length?
-        if @placement_attempt_array.length == @ship.length 
+        if @placement_attempt_array.size == @ship.length 
             true
-        elsif @placement_attempt_array.length != @ship.length
+        elsif @placement_attempt_array.size != @ship.length
             false
         end
     end
