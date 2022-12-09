@@ -29,7 +29,7 @@ class Board
 
     # placements is valid if cells passed are equal to the ship's length AND [&&] if the cells passed are consecutive(and not diagonal)
     def valid_placement?(ship, placment_attempt_array)
-        # I know the if method is redundant... how do I NOT use the if method? just line 33?
+        # I know the if method is redundant... do I just leave the line of text by itself? 
         if correct_length? && consecutive_cells?
             true
         elsif
@@ -37,40 +37,45 @@ class Board
         end
     end
        
-    # ensures the number of cells passed are equal to the length of a ship
+    # ensures the amount of cells passed are equal to the length of a ship
+    # How do we call the placement_attempt_array in this helper method? 
     def correct_length?
-        if array_of_cells.size == ship.length 
+        if placement_attempt_array.size == ship.length 
             true
-        elsif array_of_cells.size != ship.length
+        elsif placement_attempt_array.size != ship.length
             false
         end
     end
             
-
+    # ensures the placement attempt elements passed are consecutive
+    # How do we call the placement_attempt_array in this helper method? 
     def consecutive_cells?
-        Letters = []
-        Numbers = []
+        letters = []
+        numbers = []
 
         placement_attempt_array.each do |indv_coordinate|
-            Letters << indv_coordinate.index[0].ord
-            Numbers << indv_coordinate.index[-1].to_i
-
-            # This line is ensuring the coordinates are NOT diagonal
-            #if Letters != same || Numbers != same
-                #false
-
-            #elsif Letters == same?
-                # Numbers == consecutive
-                #     true
-                # Numbers != consecutive
-                #     false
+            letters << indv_coordinate.index[0] #.ord
+            numbers << indv_coordinate.index[-1] #.to_i
+        end
+ 
+        if letters.all? != true || numbers.all? != true
+            false
                 
-            #elsif Numbers == same? 
-                # Letters == consecutive
-                #     true
-                # Letters != consecutive
-                #     false
-            #end    
+        elsif letters.all? == true
+            # maybe I need to order the numbers? => numbers.sort ?
+            # again, I'm being redundant with If conditional... do I just leave the line of text by itself?
+            if numbers.each_cons(ship.length.size) == true
+                true
+            else
+                false
+        end
+                
+        elsif numbers.all? == true 
+            if letters.each_cons(ship.length.size) == true
+                true
+            else
+                false
+            end    
         end
     end
 
