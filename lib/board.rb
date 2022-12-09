@@ -32,7 +32,7 @@ class Board
         @placement_attempt_array = placement_attempt_array
         @ship = ship
 
-        if unq_cells? == true && correct_length? == true && consecutive_cells? == true
+        if unq_cells? == true && correct_length? == true && lined_up? == true && adjacent? == true
             true
         else
             false
@@ -72,7 +72,9 @@ class Board
     end
 
     def lined_up?
-        if cell_first_character.uniq.size == 1 || cell_second_character.uniq.size == 1
+        if cell_first_character.first > cell_first_character.last || cell_second_character.first > cell_second_character.last
+            false
+        elsif cell_first_character.uniq.size == 1 || cell_second_character.uniq.size == 1
             true
         else
             false
@@ -104,10 +106,7 @@ class Board
     end
 
 
-
-    end
-
-
+end
 
 
 
@@ -181,4 +180,3 @@ class Board
         # Numb - check they are same/different && [1,2,3]consecutive
 
 
-end
