@@ -61,9 +61,12 @@ describe Board do
             expect(cell_3 = board.cells["A3"]).to be_an_instance_of(Cell)
         end
         
-        xit "can place a ship in multiple cells" do
+        it "can place a ship in multiple cells" do
             board.place(cruiser, ["A1", "A2", "A3"])
-        
+            cell_1 = board.cells["A1"]
+            cell_2 = board.cells["A2"]
+            cell_3 = board.cells["A3"]
+
             expect(cell_1.ship).to eq(cruiser)
             expect(cell_2.ship).to eq(cruiser)
             expect(cell_3.ship).to eq(cruiser)
