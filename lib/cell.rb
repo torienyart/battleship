@@ -1,9 +1,12 @@
 class Cell
 
     attr_reader :coordinate,
-                :ship,
                 :empty,
                 :taken_fire
+
+    attr_accessor :ship
+    # this attr_ allow atrributes to be read AND written to by methods outside this class/file
+    # don't make them unless you NEED them!
 
     def initialize(coordinate)
         @coordinate = coordinate

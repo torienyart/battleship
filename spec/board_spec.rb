@@ -8,25 +8,25 @@ describe Board do
     let(:cruiser) {Ship.new("Cruiser", 3)}
     let(:submarine) {Ship.new("Submarine", 2)}
 
-    let(:cell_1) {board.cells["A1"]}
-    let(:cell_2) {board.cells["A2"]}
-    let(:cell_3) {board.cells["A3"]}
-    let(:cell_4) {board.cells["A4"]}
+    # let(:cell_1) {board.cells["A1"]}
+    # let(:cell_2) {board.cells["A2"]}
+    # let(:cell_3) {board.cells["A3"]}
+    # let(:cell_4) {board.cells["A4"]}
 
-    let(:cell_5) {board.cells["B1"]}
-    let(:cell_6) {board.cells["B2"]}
-    let(:cell_7) {board.cells["B3"]}
-    let(:cell_8) {board.cells["B4"]}
+    # let(:cell_5) {board.cells["B1"]}
+    # let(:cell_6) {board.cells["B2"]}
+    # let(:cell_7) {board.cells["B3"]}
+    # let(:cell_8) {board.cells["B4"]}
 
-    let(:cell_9) {board.cells["C1"]}
-    let(:cell_10) {board.cells["C2"]}
-    let(:cell_11) {board.cells["C3"]}
-    let(:cell_12) {board.cells["C4"]}
+    # let(:cell_9) {board.cells["C1"]}
+    # let(:cell_10) {board.cells["C2"]}
+    # let(:cell_11) {board.cells["C3"]}
+    # let(:cell_12) {board.cells["C4"]}
 
-    let(:cell_13) {board.cells["D1"]}
-    let(:cell_14) {board.cells["D2"]}
-    let(:cell_15) {board.cells["D3"]}
-    let(:cell_16) {board.cells["D4"]}
+    # let(:cell_13) {board.cells["D1"]}
+    # let(:cell_14) {board.cells["D2"]}
+    # let(:cell_15) {board.cells["D3"]}
+    # let(:cell_16) {board.cells["D4"]}
 
 
     describe "the cells" do
@@ -74,18 +74,25 @@ describe Board do
     end
 
     describe "Placing Ships" do
-        it "can recognize individual cells" do
-            expect(cell_1).to eq(board.cells["A1"])
-            expect(cell_2).to eq(board.cells["A2"])
-            expect(cell_3).to eq(board.cells["A3"])
-            # expect(cell_1 = board.cells["A1"]).to be_an_instance_of(Cell)
-            # expect(cell_2 = board.cells["A2"]).to be_an_instance_of(Cell)
-            # expect(cell_3 = board.cells["A3"]).to be_an_instance_of(Cell)
-        end
+        # xit "can recognize individual cells" do
+        #     expect(cell_1).to eq(board.cells["A1"])
+        #     expect(cell_2).to eq(board.cells["A2"])
+        #     expect(cell_3).to eq(board.cells["A3"])
+        #     # expect(cell_1 = board.cells["A1"]).to be_an_instance_of(Cell)
+        #     # expect(cell_2 = board.cells["A2"]).to be_an_instance_of(Cell)
+        #     # expect(cell_3 = board.cells["A3"]).to be_an_instance_of(Cell)
+        #     expect(cell_1.ship).to eq(cruiser)
+        #     expect(cell_2.ship).to eq(cruiser)
+        #     expect(cell_3.ship).to eq(cruiser)
         
-        xit "can place a ship in multiple cells" do
+        # end
+        
+        it "can place a ship in multiple cells" do
             board.place(cruiser, ["A1", "A2", "A3"])
-        
+            cell_1 = board.cells["A1"] 
+            cell_2 = board.cells["A2"]
+            cell_3 = board.cells["A3"] 
+
             expect(cell_1.ship).to eq(cruiser)
             expect(cell_2.ship).to eq(cruiser)
             expect(cell_3.ship).to eq(cruiser)

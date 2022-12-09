@@ -106,8 +106,19 @@ class Board
         end
     end
 
+    def place(ship, coordinates)
+        coordinates.each do |coordinate|
+        cells[coordinate].ship = ship
+        end
+    end
+
+
+
+end  
     
-    #Pseudocode for place ship:
+   # require 'pry'; binding.pry
+
+#Pseudocode for place ship:
     # take the array of coordinates and the ship instance/object
     # locate the coordinate's designated board cell_# 
     # put the ship instance/object as an additional attribute/state to that cell's information?? key-value pair??
@@ -122,14 +133,14 @@ class Board
 
 
 
-end
+
 
 
 
 
 
     #### Mel's code for consecutive_cells? ###
-    
+
     # Same code for: valid_placement? method ... except if statement: correct_length? == true && consecutive_cells? == true
     # Same code for: correct_lenght? method
 
