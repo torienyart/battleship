@@ -6,7 +6,7 @@ require './lib/ship'
 
 describe Ship do
     let(:cruiser) {Ship.new("Cruiser", 3)}
-    
+
     it 'can initialize new ship object'do
         expect(cruiser).to be_an_instance_of(Ship)
     end
