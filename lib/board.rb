@@ -23,6 +23,7 @@ class Board
 
     end
 
+    # MUST ADD: Need to iterate over the array of coordinates (not just one)
     def valid_coordinate?(location)
        @cells.include?(location)
     end
@@ -38,6 +39,8 @@ class Board
         end
     end
 
+    # CAN DELETE: This is not needed because we have valid_coordinate? method that checks if the coord the user gives 
+    # is in the board array
     def check_coord_length
         @placement_attempt_array.all? do |coord|
             coord.length == 2
