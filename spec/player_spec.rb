@@ -9,27 +9,28 @@ describe Player do
     let(:c_board) {Board.new}
     let(:cruiser) {Ship.new("Cruiser", 3)}
     let(:submarine) {Ship.new("Submarine", 2)}
-    let(:player_1) {Player.new("Tori", p_board, cruiser, submarine, human)}
-    let(:computer) {Player.new("Computer Lord", c_board , cruiser, submarine, computer)}
+    let(:player_1) {Player.new("Tori", p_board, cruiser, submarine, "human")}
+    let(:computer) {Player.new("Computer Lord", c_board , cruiser, submarine, "computer")}
 
     it 'can initialize new player' do
 
         expect(player_1.name).to eq("Tori")
+        expect(player_1.player_type).to eq("human")
         expect(player_1.board).to eq(p_board)
         expect(player_1.ships).to match([cruiser, submarine])
         expect(player_1.ships_placed).to eq([])
-        expect(player1.has_lost?).to be false
+        expect(player_1.has_lost).to be false
 
         expect(computer.name).to eq("Computer Lord")
-        expect(computer.user_type).to eq(computer)
+        expect(computer.player_type).to eq("computer")
         expect(computer.board).to eq(c_board)
         expect(computer.ships).to match([cruiser, submarine])
-        expect(player_1.ships_placed).to eq([])
-        expect(computer.has_lost?).to be false
+        expect(computer.ships_placed).to eq([])
+        expect(computer.has_lost).to be false
 
     end
 
-    it 'can place player ships with input' do #I think we can't really test this since it needs input, but we can pretend to give it the input
+    xit 'can place player ships with input' do #I think we can't really test this since it needs input, but we can pretend to give it the input
         
         player_1.ship_placement(cruiser, ["A1", "A2", "A3"])
         player_1.ship_placement(cruiser, ["C4", "D4"])
@@ -39,7 +40,7 @@ describe Player do
 
     end
 
-    it 'can place computer ships' do #want to test that ships are in valid placement, there are two of them
+    xit 'can place computer ships' do #want to test that ships are in valid placement, there are two of them
        
         computer.ship_placement_rand(cruiser)
         computer.ship_placement_rand(submarine)
@@ -51,7 +52,7 @@ describe Player do
         
     end
 
-    it 'can determine if player has lost' do
+    xit 'can determine if player has lost' do
         
         player_1.ship_setup(cruiser, ["A1", "A2", "A3"])
         player_1.ship_setup(cruiser, ["C4", "D4"])
