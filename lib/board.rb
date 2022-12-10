@@ -20,8 +20,6 @@ class Board
             "D3" => Cell.new("D3"),
             "D4" => Cell.new("D4"),
         }  
-         @placement_attempt_array = nil
-         @ships = []
 
     end
 
@@ -31,6 +29,7 @@ class Board
     
     def valid_placement?(ship, placement_attempt_array)
         @placement_attempt_array = placement_attempt_array
+        @ships = []
         @ships << ship
         if check_coord_length == true && unq_cells? == true && correct_length?(ship) == true && lined_up? == true && adjacent? == true && overlap? == true
             true
