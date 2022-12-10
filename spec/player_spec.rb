@@ -30,16 +30,6 @@ describe Player do
 
     end
 
-    xit 'can place player ships with input' do #I think we can't really test this since it needs input, but we can pretend to give it the input
-        
-        player_1.ship_placement(cruiser, ["A1", "A2", "A3"])
-        player_1.ship_placement(cruiser, ["C4", "D4"])
-
-        #could test valid placement here.... but probably don't need to - the method needs to do this
-        expect(player_1.ships_placed?).to be true
-
-    end
-
     xit 'can place computer ships' do #want to test that ships are in valid placement, there are two of them
        
         computer.ship_placement_rand(cruiser)
