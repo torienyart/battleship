@@ -112,14 +112,50 @@ class Game
         end
 
         puts p_board.render(true)
+        puts "You've placed all your ships! Let's begin:\n"
+        turn
     end
 
 ### TURN
 
+    def turn
+        puts "=============COMPUTER BOARD=============\n"
+        c_board.render(false)
+            "==============PLAYER BOARD==============\n"
+        p_board.render(true)
 
+    # Player Shot
+        puts "Enter the coordinate for your shot:\n> "
+        
+        loop do
+            user_input = gets.chomp.upcase
+            #issue here maybe because its NOT only submarine ship... but also cruiser??:
+            if c_board.valid_coordinate?(user_input) == true && c_board.valid_placement?(c_submarine, user_input) == true
+                c_board.cell.fire_upon(user_input) 
+                champion?
+                break
+            else
+                puts "Please enter a valid coordinate:\n> "
+            end
+        end
+
+    # Computer Shot
+        loop do
+            #issue here maybebecause its NOT only submarine ship... but also cruiser??
+            if p_board.valid_coordinate?(user_input) == true && p_board.valid_placement?(p_submarine, user_input) == true
+                p_board.cell.fire_upon(user_input) 
+                champion?
+                break
+            else
+                false
+            end
+        end
+
+        turn
+    end
 
 ### END GAME
-    # def champion
+    # def champion?
 
     #     if p_cruiser.sunk? == true && p_submarine.sunk? == true 
     #         puts "I won!"
