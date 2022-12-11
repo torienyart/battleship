@@ -21,7 +21,7 @@ class Game
 ### MAIN MENU
 
     def start
-            puts "Welcome to BATTLESHIP\n"
+            puts "Welcome to BATTLESHIP\n" +
             "Enter p to play. Enter q to quit.\n"
 
         loop do
@@ -129,8 +129,8 @@ class Game
         
         loop do
             user_input = gets.chomp.upcase
-            #issue here maybe because its NOT only submarine ship... but also cruiser??:
-            if c_board.valid_coordinate?(user_input) == true && c_board.valid_placement?(c_submarine, user_input) == true
+            if c_board.valid_coordinate?(user_input) == true 
+                
                c_board.cell.fire_upon(user_input) 
 
                     if c_board.cell.fired_upon?(user_input) == true
@@ -140,27 +140,27 @@ class Game
                         puts "Your shot on #{user_input} was a miss."
                         break
                     end
-                    
+
             else
                 puts "Please enter a valid coordinate:\n> "
             end
         end
 
-    # Computer Shot
-        loop do
-            comp_input = @c_board.cells.keys.sample
-            #issue here maybebecause its NOT only submarine ship... but also cruiser??
-            if p_board.valid_coordinate?(comp_input) == true && p_board.valid_placement?(p_submarine, comp_input) == true
-                p_board.cell.fire_upon(comp_input) 
-                champion?
-                break
-            else
-                puts "My shot on #{comp_input} was a miss."
-            end
-        end
+#     # Computer Shot
+#         loop do
+#             comp_input = @c_board.cells.keys.sample
+#             #issue here maybebecause its NOT only submarine ship... but also cruiser??
+#             if p_board.valid_coordinate?(comp_input) == true && p_board.valid_placement?(p_submarine, comp_input) == true
+#                 p_board.cell.fire_upon(comp_input) 
+#                 champion?
+#                 break
+#             else
+#                 puts "My shot on #{comp_input} was a miss."
+#             end
+#         end
 
-        turn
-    end
+#         turn
+#     end
 
 ### END GAME
     # def champion?
