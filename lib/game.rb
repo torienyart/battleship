@@ -116,35 +116,35 @@ class Game
         turn
     end
 
-### TURN
+# ### TURN
 
-    def turn
-        puts "=============COMPUTER BOARD=============\n"
-        c_board.render(false)
-            "==============PLAYER BOARD==============\n"
-        p_board.render(true)
+#     def turn
+#         puts "=============COMPUTER BOARD=============\n"
+#         c_board.render(false)
+#             "==============PLAYER BOARD==============\n"
+#         p_board.render(true)
 
-    # Player Shot
-        puts "Enter the coordinate for your shot:\n> "
+#     # Player Shot
+#         puts "Enter the coordinate for your shot:\n> "
         
-        loop do
-            user_input = gets.chomp.upcase
-            if c_board.valid_coordinate?(user_input) == true 
-                
-               c_board.cell.fire_upon(user_input) 
+#         loop do
+#             user_input = gets.chomp.upcase
+#             if c_board.valid_coordinate?(user_input) == true 
 
-                    if c_board.cell.fired_upon?(user_input) == true
-                        champion?
-                        break
-                    else 
-                        puts "Your shot on #{user_input} was a miss."
-                        break
-                    end
+#                c_board.cell.fire_upon(user_input) 
 
-            else
-                puts "Please enter a valid coordinate:\n> "
-            end
-        end
+#                     if c_board.cell.fired_upon?(user_input) == true
+#                         champion?
+#                         break
+#                     else 
+#                         puts "Your shot on #{user_input} was a miss."
+#                         break
+#                     end
+
+#             else
+#                 puts "Please enter a valid coordinate:\n> "
+#             end
+#         end
 
 #     # Computer Shot
 #         loop do
