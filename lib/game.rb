@@ -126,28 +126,11 @@ class Game
         # until champion? == true
             start_turn_statement
             player_shot
-            require 'pry'; binding.pry
             computer_shot
+            
         # end
     end
     # Player Shot
-        
-
-    # # Computer Shot
-    #     loop do
-    #         comp_input = @c_board.cells.keys.sample
-    #         #issue here maybebecause its NOT only submarine ship... but also cruiser??
-    #         if p_board.valid_coordinate?(comp_input) == true && p_board.valid_placement?(p_submarine, comp_input) == true
-    #             p_board.cell.fire_upon(comp_input) 
-    #             champion?
-    #             break
-    #         else
-    #             puts "My shot on #{comp_input} was a miss."
-    #         end
-    #     end
-
-    #     turn
-    # end
 
 # ## END GAME
 #     def champion?
@@ -173,24 +156,36 @@ class Game
 
     def player_shot
         puts "Enter the coordinate for your shot:\n> "
-        
         @user_shot = gets.chomp.upcase
         shot_fired = false
-
-        until shot_fired == true
+        while shot_fired == false
             if c_board.valid_coordinate?([@user_shot]) == true && c_board.cells[@user_shot].fired_upon? == false
                 c_board.cells[@user_shot].fire_upon 
                 shot_fired = true
             else
                 puts "You CHEATER! Try attacking with a valid coordinate you haven't already fired at."
             end
-
         end
-        puts "Your shot on #{@user_shot} was a #{render_status}"
+        puts "Your shot on #{@user_shot} was a #{p_render_status}"
     end
 
-    def render_status
-        
+    def computer_shot
+        shot_fired = false
+        while shot_fired == false
+            @comp_shot = @p_board.cells.keys.sample
+
+            if p_board.cells[@comp_shot].fired_upon? == false
+                p_board.cells[@comp_shot].fire_upon 
+                shot_fired = true
+            else
+                shot_fired = false
+            end
+
+        end
+        puts "My shot on #{@comp_shot} was a #{c_render_status}"
+    end
+
+    def p_render_status
         if c_board.cells[@user_shot].render == "M"
            'miss... better luck next time loser.' 
         elsif c_board.cells[@user_shot].render == "H"
@@ -198,7 +193,16 @@ class Game
         elsif c_board.cells[@user_shot].render == "X"
             'hit. You sunk my ship you pillaging sea scum!'
         end
+    end
 
+    def c_render_status
+        if p_board.cells[@comp_shot].render == "M"
+           'miss... Ill get you next time....' 
+        elsif p_board.cells[@comp_shot].render == "H"
+            'hit. Feels good, doesnt it......'
+        elsif p_board.cells[@comp_shot].render == "X"
+            'hit. Take that you unprepared sea scum!'
+        end
     end
 
 
