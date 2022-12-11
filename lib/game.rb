@@ -23,21 +23,38 @@ class Game
         "You now need to lay out your two ships.\n"
         "The Cruiser is three units long and the Submarine is two units long.\n"
         
-        puts @p_board.render(false)
+        # puts @p_board.render(false)
         
-        # c_ship_placement
+        c_ship_placement
+        puts c_board.render(true)
+
         p_ship_placement
     end
 
-    # def c_ship_placement
+    def c_ship_placement
+        
+        loop do 
+            comp_input = @c_board.cells.keys.sample(3)
 
-    #     #comp choose random coordinates
-    #     #until those are .valid_coordinates? AND .valid_placement? are TRUE
-    #     #then .place the ship
+            if c_board.valid_coordinate?(comp_input) == true && c_board.valid_placement?(cruiser, comp_input) == true
+                c_board.place(cruiser, comp_input)
+                break 
+            else
+                false
+            end
+        end
+        
+        loop do
+            comp_input = @c_board.cells.keys.sample(2)
 
-    #     #repeate for other ship
-
-    # end
+            if c_board.valid_coordinate?(comp_input) == true && c_board.valid_placement?(submarine, comp_input) == true
+                c_board.place(submarine, comp_input) 
+                break
+            else
+                false
+            end
+        end
+    end
 
 
     def p_ship_placement
