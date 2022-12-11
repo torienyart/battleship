@@ -23,8 +23,20 @@ class Board
 
     end
 
-    def valid_coordinate?(location)
-       @cells.include?(location)
+    def valid_coordinate?(coordinates)
+        # @cells.include?(location)
+
+        # if coordinates.class == String
+        #     coordinates.split(" ")
+        # end
+
+        coordinates.all? do |coordinate|
+            @cells.keys.include?(coordinate)
+        end
+        
+        # can't pry into enumerables written like this: 
+        # coordinates.all? {|coordinate| @cells.keys.include?(coordinate)}
+        
     end
     
     def valid_placement?(ship, placement_attempt_array)
@@ -38,6 +50,8 @@ class Board
         end
     end
 
+    # CAN DELETE: This is not needed because we have valid_coordinate? method that checks if the coord the user gives 
+    # is in the board array
     def check_coord_length
         @placement_attempt_array.all? do |coord|
             coord.length == 2

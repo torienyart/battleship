@@ -35,15 +35,12 @@ class Cell
     end
 
     def fire_upon
-        if @taken_fire == false && @ship != nil
+        if @ship != nil
             @ship.hit
             @taken_fire = true
-        elsif @taken_fire == false && @ship == nil
+        elsif @ship == nil
             @taken_fire = true
-        elsif @taken_fire == true
-            p "You've already fired at this cell.  Try again" 
         end
-
     end
 
     #okay so i realized a bug here where a cell doesn't stop you from hitting it if it has already been hit... which damages the ship again incorrectly.  need to fix in fire_upon
