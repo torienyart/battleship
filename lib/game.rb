@@ -83,7 +83,7 @@ class Game
 
     def p_ship_placement
     #Cruiser_Placement
-        puts "Enter the squares for the Cruiser (3 spaces):\n> "
+        puts "Enter the squares for the Cruiser (3 spaces like this Z1 Z2 Z3):\n> "
         
         #<while true do> would also work here (this is hard coding)
        loop do 
@@ -93,14 +93,14 @@ class Game
                 p_board.place(p_cruiser, user_input)
                 break 
             else
-                puts "Those are invalid coordinates. Please try again:\n> "
+                puts "Nice try you cheating privy rat — try again with valid coordinates!:\n> "
             end
         end
         
         puts p_board.render(true)
     
     #Sumbarine_placement
-        puts "Enter the squares for the Submarine (2 spaces):\n> "
+        puts "Enter the squares for the Submarine (2 spaces like this Z1 Z2):\n> "
             
         loop do
             user_input = gets.chomp.upcase.split(" ")
@@ -109,7 +109,7 @@ class Game
                 p_board.place(p_submarine, user_input) 
                 break
             else
-                puts "Those are invalid coordinates. Please try again:\n> "
+                puts "Nice try you cheating privy rat — try again with valid coordinates!:\n> "
             end
         end
 
@@ -123,29 +123,12 @@ class Game
 ### TURN
 
     def turn # needs to be a loop until winner is true
-        # until champion? == true
+        while champion? == false
             start_turn_statement
             player_shot
             computer_shot
-            
-        # end
+        end
     end
-    # Player Shot
-
-# ## END GAME
-#     def champion?
-
-#         if p_cruiser.sunk? == true && p_submarine.sunk? == true 
-#             puts "I won!"
-#             start
-#         elsif c_cruiser.sunk? == true && c_submarine.sunk? == true
-#             puts "You won!"
-#             start
-#         else
-#             ###return to player or computer shot
-#         end
-
-#     end
 
     def start_turn_statement
         puts "=============COMPUTER BOARD=============\n"
@@ -191,7 +174,7 @@ class Game
         elsif c_board.cells[@user_shot].render == "H"
             'hit. *;*OUch*;*'
         elsif c_board.cells[@user_shot].render == "X"
-            'hit. You sunk my ship you pillaging sea scum!'
+            'hit. Blimey, you sunk my ship you pillaging sea scum!'
         end
     end
 
@@ -205,5 +188,16 @@ class Game
         end
     end
 
-
+    ## END GAME
+    def champion?
+        if p_cruiser.sunk? == true && p_submarine.sunk? == true 
+            puts "I won! Better take your battles on land from now on you scabby sea bass!!!"
+            start
+        elsif c_cruiser.sunk? == true && c_submarine.sunk? == true
+            puts "You've plundered my fleet. The gold is yours, command the seas wisely you rapscallion!"
+            start
+        else
+            false
+        end
+    end
 end
