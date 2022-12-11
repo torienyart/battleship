@@ -1,19 +1,19 @@
 class Game
     attr_reader :p_board,
                 :p_cruiser,
-                :p_sub,
+                :p_submarine,
                 :c_board, 
-                :p_cruiser,
-                :p_sub
+                :c_cruiser,
+                :c_submarine
 
     def initialize()
         @p_board = Board.new
         @p_cruiser = Ship.new("Cruiser", 3)
-        @p_sub = Ship.new("Submarine", 2)
+        @p_submarine = Ship.new("Submarine", 2)
 
         @c_board = Board.new
         @c_cruiser = Ship.new("Cruiser", 3)
-        @c_sub = Ship.new("Submarine", 2) 
+        @c_submarine = Ship.new("Submarine", 2) 
     end
 
 # require 'pry'; binding.pry
@@ -23,11 +23,9 @@ class Game
         "You now need to lay out your two ships.\n"
         "The Cruiser is three units long and the Submarine is two units long.\n"
         
-        # puts @p_board.render(false)
+        puts @p_board.render(false)
         
         c_ship_placement
-        puts c_board.render(true)
-
         p_ship_placement
     end
 
@@ -36,8 +34,8 @@ class Game
         loop do 
             comp_input = @c_board.cells.keys.sample(3)
 
-            if c_board.valid_coordinate?(comp_input) == true && c_board.valid_placement?(cruiser, comp_input) == true
-                c_board.place(cruiser, comp_input)
+            if c_board.valid_coordinate?(comp_input) == true && c_board.valid_placement?(c_cruiser, comp_input) == true
+                c_board.place(c_cruiser, comp_input)
                 break 
             else
                 false
@@ -47,8 +45,8 @@ class Game
         loop do
             comp_input = @c_board.cells.keys.sample(2)
 
-            if c_board.valid_coordinate?(comp_input) == true && c_board.valid_placement?(submarine, comp_input) == true
-                c_board.place(submarine, comp_input) 
+            if c_board.valid_coordinate?(comp_input) == true && c_board.valid_placement?(c_submarine, comp_input) == true
+                c_board.place(c_submarine, comp_input) 
                 break
             else
                 false
@@ -63,10 +61,10 @@ class Game
         
         #<while true do> would also work here (this is hard coding)
        loop do 
-            user_input = gets.chomp.upcase
+            user_input = gets.chomp.upcase.split(" ")
 
-            if p_board.valid_coordinate?(user_input) == true && p_board.valid_placement?(cruiser, user_input) == true
-                p_board.place(cruiser, user_input)
+            if p_board.valid_coordinate?(user_input) == true && p_board.valid_placement?(p_cruiser, user_input) == true
+                p_board.place(p_cruiser, user_input)
                 break 
             else
                 puts "Those are invalid coordinates. Please try again:\n> "
@@ -79,10 +77,10 @@ class Game
         puts "Enter the squares for the Submarine (2 spaces):\n> "
             
         loop do
-            user_input = gets.chomp.upcase
+            user_input = gets.chomp.upcase.split(" ")
 
-            if p_board.valid_coordinate?(user_input) == true && p_board.valid_placement?(submarine, user_input) == true
-                p_board.place(submarine, user_input) 
+            if p_board.valid_coordinate?(user_input) == true && p_board.valid_placement?(p_submarine, user_input) == true
+                p_board.place(p_submarine, user_input) 
                 break
             else
                 puts "Those are invalid coordinates. Please try again:\n> "

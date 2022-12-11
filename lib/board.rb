@@ -23,9 +23,20 @@ class Board
 
     end
 
-    # MUST ADD: Need to iterate over the array of coordinates (not just one)
-    def valid_coordinate?(location)
-       @cells.include?(location)
+    def valid_coordinate?(coordinates)
+        # @cells.include?(location)
+
+        # if coordinates.class == String
+        #     coordinates.split(" ")
+        # end
+
+        coordinates.all? do |coordinate|
+            @cells.keys.include?(coordinate)
+        end
+        
+        # can't pry into enumerables written like this: 
+        # coordinates.all? {|coordinate| @cells.keys.include?(coordinate)}
+        
     end
     
     def valid_placement?(ship, placement_attempt_array)

@@ -20,11 +20,13 @@ describe Board do
 
     describe "Validating Coordinates" do
         it "can validate a coordinate" do
-            expect(board.valid_coordinate?("A1")).to eq(true)
-            expect(board.valid_coordinate?("D4")).to eq(true)
-            expect(board.valid_coordinate?("A5")).to eq(false)
-            expect(board.valid_coordinate?("E1")).to eq(false)
-            expect(board.valid_coordinate?("A22")).to eq(false)
+            expect(board.valid_coordinate?(["A1"])).to eq(true)
+            expect(board.valid_coordinate?(["D4"])).to eq(true)
+            expect(board.valid_coordinate?(["A5"])).to eq(false)
+            expect(board.valid_coordinate?(["E1"])).to eq(false)
+            expect(board.valid_coordinate?(["A22"])).to eq(false)
+
+            expect(board.valid_coordinate?(["A1", "A2", "A3"])).to eq(true)
         end
     end 
 
