@@ -131,9 +131,16 @@ class Game
             user_input = gets.chomp.upcase
             #issue here maybe because its NOT only submarine ship... but also cruiser??:
             if c_board.valid_coordinate?(user_input) == true && c_board.valid_placement?(c_submarine, user_input) == true
-                c_board.cell.fire_upon(user_input) 
-                champion?
-                break
+               c_board.cell.fire_upon(user_input) 
+
+                    if c_board.cell.fired_upon?(user_input) == true
+                        champion?
+                        break
+                    else 
+                        puts "Your shot on #{user_input} was a miss."
+                        break
+                    end
+                    
             else
                 puts "Please enter a valid coordinate:\n> "
             end
@@ -141,13 +148,14 @@ class Game
 
     # Computer Shot
         loop do
+            comp_input = @c_board.cells.keys.sample
             #issue here maybebecause its NOT only submarine ship... but also cruiser??
-            if p_board.valid_coordinate?(user_input) == true && p_board.valid_placement?(p_submarine, user_input) == true
-                p_board.cell.fire_upon(user_input) 
+            if p_board.valid_coordinate?(comp_input) == true && p_board.valid_placement?(p_submarine, comp_input) == true
+                p_board.cell.fire_upon(comp_input) 
                 champion?
                 break
             else
-                false
+                puts "My shot on #{comp_input} was a miss."
             end
         end
 
@@ -171,12 +179,3 @@ class Game
 
 
 end
-
-
-
-# PseudoCode for ship_placement:
-        # comp accepts user input: coordinates
-        # when those coord are BOTH are .valid_coordinate? .valid_placement? are TRUE
-            #if TRUE: .place the ship
-            #if FALSE: print try again screen
-        #Then, repeate for other ship
