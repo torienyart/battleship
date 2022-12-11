@@ -18,7 +18,31 @@ class Game
 
 # require 'pry'; binding.pry
 
+### MAIN MENU
+
     def start
+            puts "Welcome to BATTLESHIP\n"
+            "Enter p to play. Enter q to quit.\n"
+
+        loop do
+            user_choice = gets.chomp.downcase
+
+            if user_choice == "p"
+                setup
+            elsif user_choice == "q"
+                break
+            else 
+                puts "Didn't understsand that.\n"
+                "Enter p to play. Enter q to quit.\n"
+            end
+        end
+
+    end
+
+
+### GAME SETUP
+
+    def setup
         puts "I have laid out my ships on the grid.\n"
         "You now need to lay out your two ships.\n"
         "The Cruiser is three units long and the Submarine is two units long.\n"
@@ -89,6 +113,26 @@ class Game
 
         puts p_board.render(true)
     end
+
+### TURN
+
+
+
+### END GAME
+    # def champion
+
+    #     if p_cruiser.sunk? == true && p_submarine.sunk? == true 
+    #         puts "I won!"
+    #         start
+    #     elsif c_cruiser.sunk? == true && c_submarine.sunk? == true
+    #         puts "You won!"
+    #         start
+    #     else
+    #         ###return to player or computer shot
+    #     end
+
+    # end
+
 
 end
 
