@@ -14,6 +14,8 @@ class Game
         @c_board = Board.new
         @c_cruiser = Ship.new("Cruiser", 3)
         @c_submarine = Ship.new("Submarine", 2) 
+
+        @champion = nil
     end
 
 # require 'pry'; binding.pry
@@ -112,67 +114,89 @@ class Game
         end
 
         puts p_board.render(true)
-        puts "You've placed all your ships! Let's begin:\n"
+        puts 
+        puts "---------You've placed all your ships! Let's begin:---------\n"
+        puts
         turn
     end
 
 ### TURN
 
-    def turn
-        puts "=============COMPUTER BOARD=============\n"
-        c_board.render(false)
-            "==============PLAYER BOARD==============\n"
-        p_board.render(true)
-
+    def turn # needs to be a loop until winner is true
+        # until champion? == true
+            start_turn_statement
+            player_shot
+            require 'pry'; binding.pry
+            computer_shot
+        # end
+    end
     # Player Shot
-        puts "Enter the coordinate for your shot:\n> "
         
-        loop do
-            user_input = gets.chomp.upcase
-            if c_board.valid_coordinate?(user_input) == true 
 
-               c_board.cell.fire_upon(user_input) 
+    # # Computer Shot
+    #     loop do
+    #         comp_input = @c_board.cells.keys.sample
+    #         #issue here maybebecause its NOT only submarine ship... but also cruiser??
+    #         if p_board.valid_coordinate?(comp_input) == true && p_board.valid_placement?(p_submarine, comp_input) == true
+    #             p_board.cell.fire_upon(comp_input) 
+    #             champion?
+    #             break
+    #         else
+    #             puts "My shot on #{comp_input} was a miss."
+    #         end
+    #     end
 
-                    if c_board.cell.fired_upon?(user_input) == true
-                        champion?
-                        break
-                    else 
-                        puts "Your shot on #{user_input} was a miss."
-                        break
-                    end
+    #     turn
+    # end
 
-            else
-                puts "Please enter a valid coordinate:\n> "
-            end
-        end
+# ## END GAME
+#     def champion?
 
-    # Computer Shot
-        loop do
-            comp_input = @c_board.cells.keys.sample
-            #issue here maybebecause its NOT only submarine ship... but also cruiser??
-            if p_board.valid_coordinate?(comp_input) == true && p_board.valid_placement?(p_submarine, comp_input) == true
-                p_board.cell.fire_upon(comp_input) 
-                champion?
-                break
-            else
-                puts "My shot on #{comp_input} was a miss."
-            end
-        end
+#         if p_cruiser.sunk? == true && p_submarine.sunk? == true 
+#             puts "I won!"
+#             start
+#         elsif c_cruiser.sunk? == true && c_submarine.sunk? == true
+#             puts "You won!"
+#             start
+#         else
+#             ###return to player or computer shot
+#         end
 
-        turn
+#     end
+
+    def start_turn_statement
+        puts "=============COMPUTER BOARD=============\n"
+        puts c_board.render(false)
+        puts "==============PLAYER BOARD==============\n"
+        puts p_board.render(true)
     end
 
-## END GAME
-    def champion?
+    def player_shot
+        puts "Enter the coordinate for your shot:\n> "
+        
+        @user_shot = gets.chomp.upcase
+        shot_fired = false
 
-        if p_cruiser.sunk? == true && p_submarine.sunk? == true 
-            puts "I won!"
-            start
-        elsif c_cruiser.sunk? == true && c_submarine.sunk? == true
-            puts "You won!"
-            start
-        else
-            ###return to player or computer shot
+        until shot_fired == true
+            if c_board.valid_coordinate?([@user_shot]) == true && c_board.cells[@user_shot].fired_upon? == false
+                c_board.cells[@user_shot].fire_upon 
+                shot_fired = true
+            else
+                puts "You CHEATER! Try attacking with a valid coordinate you haven't already fired at."
+            end
+
+        end
+        puts "Your shot on #{@user_shot} was a #{render_status}"
+    end
+
+    def render_status
+        
+        if c_board.cells[@user_shot].render == "M"
+           'miss... better luck next time loser.' 
+        elsif c_board.cells[@user_shot].render == "H"
+            'hit. *;*OUch*;*'
+        elsif c_board.cells[@user_shot].render == "X"
+            'hit. You sunk my ship you pillaging sea scum!'
         end
 
     end
