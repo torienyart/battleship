@@ -58,7 +58,7 @@ class Game
         loop do 
             comp_input = @c_board.cells.keys.sample(3)
 
-            if c_board.valid_coordinate?(comp_input) == true && c_board.valid_placement?(c_cruiser, comp_input) == true
+            if  c_board.valid_placement?(c_cruiser, comp_input) == true
                 c_board.place(c_cruiser, comp_input)
                 break 
             else
@@ -69,7 +69,7 @@ class Game
         loop do
             comp_input = @c_board.cells.keys.sample(2)
 
-            if c_board.valid_coordinate?(comp_input) == true && c_board.valid_placement?(c_submarine, comp_input) == true
+            if c_board.valid_placement?(c_submarine, comp_input) == true
                 c_board.place(c_submarine, comp_input) 
                 break
             else
@@ -116,66 +116,66 @@ class Game
         turn
     end
 
-# ### TURN
+### TURN
 
-#     def turn
-#         puts "=============COMPUTER BOARD=============\n"
-#         c_board.render(false)
-#             "==============PLAYER BOARD==============\n"
-#         p_board.render(true)
+    def turn
+        puts "=============COMPUTER BOARD=============\n"
+        c_board.render(false)
+            "==============PLAYER BOARD==============\n"
+        p_board.render(true)
 
-#     # Player Shot
-#         puts "Enter the coordinate for your shot:\n> "
+    # Player Shot
+        puts "Enter the coordinate for your shot:\n> "
         
-#         loop do
-#             user_input = gets.chomp.upcase
-#             if c_board.valid_coordinate?(user_input) == true 
+        loop do
+            user_input = gets.chomp.upcase
+            if c_board.valid_coordinate?(user_input) == true 
 
-#                c_board.cell.fire_upon(user_input) 
+               c_board.cell.fire_upon(user_input) 
 
-#                     if c_board.cell.fired_upon?(user_input) == true
-#                         champion?
-#                         break
-#                     else 
-#                         puts "Your shot on #{user_input} was a miss."
-#                         break
-#                     end
+                    if c_board.cell.fired_upon?(user_input) == true
+                        champion?
+                        break
+                    else 
+                        puts "Your shot on #{user_input} was a miss."
+                        break
+                    end
 
-#             else
-#                 puts "Please enter a valid coordinate:\n> "
-#             end
-#         end
+            else
+                puts "Please enter a valid coordinate:\n> "
+            end
+        end
 
-#     # Computer Shot
-#         loop do
-#             comp_input = @c_board.cells.keys.sample
-#             #issue here maybebecause its NOT only submarine ship... but also cruiser??
-#             if p_board.valid_coordinate?(comp_input) == true && p_board.valid_placement?(p_submarine, comp_input) == true
-#                 p_board.cell.fire_upon(comp_input) 
-#                 champion?
-#                 break
-#             else
-#                 puts "My shot on #{comp_input} was a miss."
-#             end
-#         end
+    # Computer Shot
+        loop do
+            comp_input = @c_board.cells.keys.sample
+            #issue here maybebecause its NOT only submarine ship... but also cruiser??
+            if p_board.valid_coordinate?(comp_input) == true && p_board.valid_placement?(p_submarine, comp_input) == true
+                p_board.cell.fire_upon(comp_input) 
+                champion?
+                break
+            else
+                puts "My shot on #{comp_input} was a miss."
+            end
+        end
 
-#         turn
-#     end
+        turn
+    end
 
-### END GAME
-    # def champion?
+## END GAME
+    def champion?
 
-    #     if p_cruiser.sunk? == true && p_submarine.sunk? == true 
-    #         puts "I won!"
-    #         start
-    #     elsif c_cruiser.sunk? == true && c_submarine.sunk? == true
-    #         puts "You won!"
-    #         start
-    #     else
-    #         ###return to player or computer shot
-    #     end
+        if p_cruiser.sunk? == true && p_submarine.sunk? == true 
+            puts "I won!"
+            start
+        elsif c_cruiser.sunk? == true && c_submarine.sunk? == true
+            puts "You won!"
+            start
+        else
+            ###return to player or computer shot
+        end
 
-    # end
+    end
 
 
 end
