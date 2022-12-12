@@ -1,10 +1,5 @@
 class Game
-    attr_reader :p_board,
-                :p_cruiser,
-                :p_submarine,
-                :c_board, 
-                :c_cruiser,
-                :c_submarine
+    attr_reader :champion
 
     def initialize()
         @p_board = Board.new
@@ -47,8 +42,8 @@ class Game
     def c_ship_placement
         loop do 
             comp_input = @c_board.cells.keys.sample(3)
-            if  c_board.valid_placement?(c_cruiser, comp_input) == true
-                c_board.place(c_cruiser, comp_input)
+            if  @c_board.valid_placement?(@c_cruiser, comp_input) == true
+                @c_board.place(@c_cruiser, comp_input)
                 break 
             else
                 false
@@ -57,8 +52,8 @@ class Game
         
         loop do
             comp_input = @c_board.cells.keys.sample(2)
-            if c_board.valid_placement?(c_submarine, comp_input) == true
-                c_board.place(c_submarine, comp_input) 
+            if @c_board.valid_placement?(@c_submarine, comp_input) == true
+                @c_board.place(@c_submarine, comp_input) 
                 break
             else
                 false
@@ -74,29 +69,29 @@ class Game
         loop do 
             user_input = gets.chomp.upcase.split(" ")
 
-            if p_board.valid_coordinate?(user_input) == true && p_board.valid_placement?(p_cruiser, user_input) == true
-                p_board.place(p_cruiser, user_input)
+            if@p_board.valid_coordinate?(user_input) == true && @p_board.valid_placement?(@p_cruiser, user_input) == true
+                @p_board.place(@p_cruiser, user_input)
                 break 
             else
                 puts "Nice try you cheating privy rat — try again with valid coordinates!:\n> "
             end
         end
 
-        puts p_board.render(true)
+        puts @p_board.render(true)
         puts
         puts "Enter the squares for the Submarine (2 spaces like this Z1 Z2):\n> "
             
         loop do
             user_input = gets.chomp.upcase.split(" ")
-            if p_board.valid_coordinate?(user_input) == true && p_board.valid_placement?(p_submarine, user_input) == true
-                p_board.place(p_submarine, user_input) 
+            if @p_board.valid_coordinate?(user_input) == true && @p_board.valid_placement?(@p_submarine, user_input) == true
+                @p_board.place(@p_submarine, user_input) 
                 break
             else
                 puts "Nice try you cheating privy rat — try again with valid coordinates!:\n> "
             end
         end
 
-        puts p_board.render(true)
+        puts @p_board.render(true)
         puts
         puts "*======================================================*"
         puts 
@@ -106,11 +101,13 @@ class Game
     end
 
     def turn 
-        while champion? == false
+        while @champion == false
             start_turn_statement
             player_shot
+            champion?
             if @champion == false
                 computer_shot
+                champion?
             end
         end
 
@@ -125,9 +122,9 @@ class Game
 
     def start_turn_statement
         puts "=============COMPUTER BOARD=============\n"
-        puts c_board.render(true)
+        puts @c_board.render(false)
         puts "==============PLAYER BOARD==============\n"
-        puts p_board.render(true)
+        puts @p_board.render(true)
     end
 
     def player_shot
@@ -136,8 +133,8 @@ class Game
         while shot_fired == false
             puts "Enter the coordinate for your shot:\n> "
             @user_shot = gets.chomp.upcase
-            if c_board.valid_coordinate?([@user_shot]) == true && c_board.cells[@user_shot].fired_upon? == false
-                c_board.cells[@user_shot].fire_upon 
+            if @c_board.valid_coordinate?([@user_shot]) == true && @c_board.cells[@user_shot].fired_upon? == false
+                @c_board.cells[@user_shot].fire_upon 
                 shot_fired = true
             else
                 puts "You CHEATER! Try attacking with a valid coordinate you haven't already fired at."
@@ -155,8 +152,8 @@ class Game
 
         while shot_fired == false
             @comp_shot = @p_board.cells.keys.sample
-            if p_board.cells[@comp_shot].fired_upon? == false
-                p_board.cells[@comp_shot].fire_upon 
+            if @p_board.cells[@comp_shot].fired_upon? == false
+                @p_board.cells[@comp_shot].fire_upon 
                 shot_fired = true
             else
                 shot_fired = false
@@ -169,27 +166,27 @@ class Game
     end
 
     def p_render_status
-        if c_board.cells[@user_shot].render == "M"
+        if @c_board.cells[@user_shot].render == "M"
            'miss... better luck next time loser.' 
-        elsif c_board.cells[@user_shot].render == "H"
+        elsif @c_board.cells[@user_shot].render == "H"
             'hit. *;*OUch*;*'
-        elsif c_board.cells[@user_shot].render == "X"
+        elsif @c_board.cells[@user_shot].render == "X"
             'hit. Blimey, you sunk my ship you pillaging sea scum!'
         end
     end
 
     def c_render_status
-        if p_board.cells[@comp_shot].render == "M"
+        if @p_board.cells[@comp_shot].render == "M"
            'miss... Ill get you next time....' 
-        elsif p_board.cells[@comp_shot].render == "H"
+        elsif @p_board.cells[@comp_shot].render == "H"
             'hit. Feels good, doesnt it......'
-        elsif p_board.cells[@comp_shot].render == "X"
+        elsif @p_board.cells[@comp_shot].render == "X"
             'hit. Take that you scabby sea bass!'
         end
     end
 
     def champion?
-        if p_cruiser.sunk? == true && p_submarine.sunk? == true 
+        if @p_cruiser.sunk? == true && @p_submarine.sunk? == true 
             @champion = true
             puts "*=======================GAME-OVER=======================*"
             puts
@@ -197,7 +194,7 @@ class Game
             puts "I won! I hope you rot for eternity in Davy Jones's Locker!"
             puts
             puts
-        elsif c_cruiser.sunk? == true && c_submarine.sunk? == true
+        elsif @c_cruiser.sunk? == true && @c_submarine.sunk? == true
             @champion = true
             puts "*=======================GAME-OVER=======================*"
             puts
