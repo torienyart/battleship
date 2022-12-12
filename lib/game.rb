@@ -110,14 +110,6 @@ class Game
                 champion?
             end
         end
-
-        # loop do
-        #     if champion? == false
-        #         start_turn_statement
-        #         player_shot
-        #         champion?
-        #     end
-        # end
     end
 
     def start_turn_statement
