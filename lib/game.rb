@@ -127,11 +127,11 @@ class Game
     end
 
     def player_shot
-        puts "Enter the coordinate for your shot:\n> "
-        @user_shot = gets.chomp.upcase
         shot_fired = false
 
         while shot_fired == false
+            puts "Enter the coordinate for your shot:\n> "
+            @user_shot = gets.chomp.upcase
             if c_board.valid_coordinate?([@user_shot]) == true && c_board.cells[@user_shot].fired_upon? == false
                 c_board.cells[@user_shot].fire_upon 
                 shot_fired = true
