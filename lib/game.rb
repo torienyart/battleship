@@ -14,24 +14,18 @@ class Game
         @c_board = Board.new
         @c_cruiser = Ship.new("Cruiser", 3)
         @c_submarine = Ship.new("Submarine", 2) 
+
+        @champion = false
     end
 
     def start
-        puts "*======================================================*"
-        puts
-        puts
-        puts "Ahoy matey! Test your wits at BATTLESHIP — a game of the seven seas.\n" +
-        "Enter p to play. Enter q to quit.\n"
-        loop do
-            user_choice = gets.chomp.downcase
-            if user_choice == "p"
-                setup
-            elsif user_choice == "q"
-                break
-            else 
-                puts "Didn't understsand that. Make up your mind! I'm a very busy pirate!\n" +
-                "Enter p to play and test your wits. Enter q to quit.\n"
-            end
+        if @champion == false
+            puts "*======================================================*"
+            puts
+            puts
+            puts "Yarrgggg.... you're brave enough to walk the plank and battle the Computer Pirate are ye?"
+            puts "Let's begin..."
+            setup
         end
     end
 
@@ -40,7 +34,7 @@ class Game
         puts "*======================================================*"
         puts
         puts
-        puts "I have arranged me ships for battle.\n" +
+        puts "I, Computer Pirate, have arranged me ships for battle.\n" +
         "I hope you have your sea legs, time to arrange your two ships.\n"
         puts
         puts "The Cruiser is three units long and the Submarine is two units long.\n"
@@ -115,13 +109,23 @@ class Game
         while champion? == false
             start_turn_statement
             player_shot
-            computer_shot
+            if @champion == false
+                computer_shot
+            end
         end
+
+        # loop do
+        #     if champion? == false
+        #         start_turn_statement
+        #         player_shot
+        #         champion?
+        #     end
+        # end
     end
 
     def start_turn_statement
         puts "=============COMPUTER BOARD=============\n"
-        puts c_board.render(false)
+        puts c_board.render(true)
         puts "==============PLAYER BOARD==============\n"
         puts p_board.render(true)
     end
@@ -186,21 +190,21 @@ class Game
 
     def champion?
         if p_cruiser.sunk? == true && p_submarine.sunk? == true 
+            @champion = true
             puts "*=======================GAME-OVER=======================*"
             puts
             puts
             puts "I won! I hope you rot for eternity in Davy Jones's Locker!"
             puts
             puts
-            start
         elsif c_cruiser.sunk? == true && c_submarine.sunk? == true
+            @champion = true
             puts "*=======================GAME-OVER=======================*"
             puts
             puts
             puts "You've *plundered* my fleet. :( Command the seas wisely you rapscallion!"
             puts
             puts
-            start
         else
             false
         end
