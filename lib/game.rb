@@ -14,52 +14,45 @@ class Game
         @c_board = Board.new
         @c_cruiser = Ship.new("Cruiser", 3)
         @c_submarine = Ship.new("Submarine", 2) 
-
-        @champion = nil
     end
 
-# require 'pry'; binding.pry
-
-### MAIN MENU
-
     def start
-            puts "Welcome to BATTLESHIP\n" +
-            "Enter p to play. Enter q to quit.\n"
-
+        puts "*======================================================*"
+        puts
+        puts
+        puts "Ahoy matey! Test your wits at BATTLESHIP — a game of the seven seas.\n" +
+        "Enter p to play. Enter q to quit.\n"
         loop do
             user_choice = gets.chomp.downcase
-
             if user_choice == "p"
                 setup
             elsif user_choice == "q"
                 break
             else 
-                puts "Didn't understsand that.\n"
-                "Enter p to play. Enter q to quit.\n"
+                puts "Didn't understsand that. Make up your mind! I'm a very busy pirate!\n" +
+                "Enter p to play and test your wits. Enter q to quit.\n"
             end
         end
-
     end
 
-
-### GAME SETUP
-
     def setup
-        puts "I have laid out my ships on the grid.\n"
-        "You now need to lay out your two ships.\n"
-        "The Cruiser is three units long and the Submarine is two units long.\n"
-        
+        puts
+        puts "*======================================================*"
+        puts
+        puts
+        puts "I have arranged me ships for battle.\n" +
+        "I hope you have your sea legs, time to arrange your two ships.\n"
+        puts
+        puts "The Cruiser is three units long and the Submarine is two units long.\n"
+        puts
         puts @p_board.render(false)
-        
         c_ship_placement
         p_ship_placement
     end
 
     def c_ship_placement
-        
         loop do 
             comp_input = @c_board.cells.keys.sample(3)
-
             if  c_board.valid_placement?(c_cruiser, comp_input) == true
                 c_board.place(c_cruiser, comp_input)
                 break 
@@ -70,7 +63,6 @@ class Game
         
         loop do
             comp_input = @c_board.cells.keys.sample(2)
-
             if c_board.valid_placement?(c_submarine, comp_input) == true
                 c_board.place(c_submarine, comp_input) 
                 break
@@ -82,11 +74,10 @@ class Game
 
 
     def p_ship_placement
-    #Cruiser_Placement
+        puts
         puts "Enter the squares for the Cruiser (3 spaces like this Z1 Z2 Z3):\n> "
-        
-        #<while true do> would also work here (this is hard coding)
-       loop do 
+
+        loop do 
             user_input = gets.chomp.upcase.split(" ")
 
             if p_board.valid_coordinate?(user_input) == true && p_board.valid_placement?(p_cruiser, user_input) == true
@@ -96,15 +87,13 @@ class Game
                 puts "Nice try you cheating privy rat — try again with valid coordinates!:\n> "
             end
         end
-        
+
         puts p_board.render(true)
-    
-    #Sumbarine_placement
+        puts
         puts "Enter the squares for the Submarine (2 spaces like this Z1 Z2):\n> "
             
         loop do
             user_input = gets.chomp.upcase.split(" ")
-
             if p_board.valid_coordinate?(user_input) == true && p_board.valid_placement?(p_submarine, user_input) == true
                 p_board.place(p_submarine, user_input) 
                 break
@@ -114,15 +103,15 @@ class Game
         end
 
         puts p_board.render(true)
+        puts
+        puts "*======================================================*"
         puts 
-        puts "---------You've placed all your ships! Let's begin:---------\n"
+        puts "*Shiver me timbers* ...You've placed all your ships! FIRE!"
         puts
         turn
     end
 
-### TURN
-
-    def turn # needs to be a loop until winner is true
+    def turn 
         while champion? == false
             start_turn_statement
             player_shot
@@ -141,6 +130,7 @@ class Game
         puts "Enter the coordinate for your shot:\n> "
         @user_shot = gets.chomp.upcase
         shot_fired = false
+
         while shot_fired == false
             if c_board.valid_coordinate?([@user_shot]) == true && c_board.cells[@user_shot].fired_upon? == false
                 c_board.cells[@user_shot].fire_upon 
@@ -149,23 +139,29 @@ class Game
                 puts "You CHEATER! Try attacking with a valid coordinate you haven't already fired at."
             end
         end
+
+        puts
+        puts "*======================================================*"
+        puts
         puts "Your shot on #{@user_shot} was a #{p_render_status}"
     end
 
     def computer_shot
         shot_fired = false
+
         while shot_fired == false
             @comp_shot = @p_board.cells.keys.sample
-
             if p_board.cells[@comp_shot].fired_upon? == false
                 p_board.cells[@comp_shot].fire_upon 
                 shot_fired = true
             else
                 shot_fired = false
             end
-
         end
+
         puts "My shot on #{@comp_shot} was a #{c_render_status}"
+        puts
+        puts
     end
 
     def p_render_status
@@ -184,17 +180,26 @@ class Game
         elsif p_board.cells[@comp_shot].render == "H"
             'hit. Feels good, doesnt it......'
         elsif p_board.cells[@comp_shot].render == "X"
-            'hit. Take that you unprepared sea scum!'
+            'hit. Take that you scabby sea bass!'
         end
     end
 
-    ## END GAME
     def champion?
         if p_cruiser.sunk? == true && p_submarine.sunk? == true 
-            puts "I won! Better take your battles on land from now on you scabby sea bass!!!"
+            puts "*=======================GAME-OVER=======================*"
+            puts
+            puts
+            puts "I won! I hope you rot for eternity in Davy Jones's Locker!"
+            puts
+            puts
             start
         elsif c_cruiser.sunk? == true && c_submarine.sunk? == true
-            puts "You've plundered my fleet. The gold is yours, command the seas wisely you rapscallion!"
+            puts "*=======================GAME-OVER=======================*"
+            puts
+            puts
+            puts "You've *plundered* my fleet. :( Command the seas wisely you rapscallion!"
+            puts
+            puts
             start
         else
             false
