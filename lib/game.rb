@@ -14,16 +14,12 @@ class Game
     end
 
     def start
-        # if @champion == false
-            puts "*======================================================*"
-            puts
-            puts
-            puts "Yarrgggg.... you're brave enough to walk the plank and battle the Computer Pirate are ye?"
-            puts "Let's begin..."
-            setup
-        # else
-
-        # end
+        puts "*======================================================*"
+        puts
+        puts
+        puts "Yarrgggg.... you're brave enough to walk the plank and battle the Computer Pirate are ye?"
+        puts "Let's begin..."
+        setup
     end
     
     def welcome
