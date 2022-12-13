@@ -14,14 +14,20 @@ class Game
     end
 
     def start
-        if @champion == false
+        # if @champion == false
             puts "*======================================================*"
             puts
             puts
             puts "Yarrgggg.... you're brave enough to walk the plank and battle the Computer Pirate are ye?"
             puts "Let's begin..."
             setup
-        end
+        # else
+
+        # end
+    end
+    
+    def welcome
+        
     end
 
     def setup
@@ -197,5 +203,6 @@ class Game
         else
             false
         end
+        @quit = false
     end
 end
