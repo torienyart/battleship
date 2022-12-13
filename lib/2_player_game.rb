@@ -20,14 +20,14 @@ class TwoPlayerGame
         puts
         puts
         puts "Yo Ho! Wonderful choice. What be yer names? "
-        puts "Enter Player1s name:"
+        puts "Enter Player1's name:"
 
         @p1_name = 'Captain ' + gets.chomp
 
         puts
         puts
         puts "Ahoy #{@p1_name}, welcome aboard."
-        puts "Enter Player2s name:"
+        puts "Enter Player2's name:"
 
         @p2_name = 'Captain ' + gets.chomp
 
@@ -245,7 +245,9 @@ class TwoPlayerGame
             puts
         elsif @p2_cruiser.sunk? == true && @p2_submarine.sunk? == true
             @champion = true
-
+            10.times do
+                puts
+            end
             puts "*=======================GAME-OVER=======================*"
             puts
             puts "=============#{@p1_name.upcase} BOARD=============\n"
