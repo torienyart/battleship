@@ -14,16 +14,16 @@ class Game
     end
 
     def start
+        welcome
+        setup
+    end
+    
+    def welcome
         puts "*======================================================*"
         puts
         puts
         puts "Yarrgggg.... you're brave enough to walk the plank and battle the Computer Pirate are ye?"
         puts "Let's begin..."
-        setup
-    end
-    
-    def welcome
-        
     end
 
     def setup
