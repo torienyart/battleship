@@ -43,7 +43,6 @@ class Cell
         end
     end
 
-    #okay so i realized a bug here where a cell doesn't stop you from hitting it if it has already been hit... which damages the ship again incorrectly.  need to fix in fire_upon
     def render(boolean = false)
         if boolean == false
             if @taken_fire == true && @ship == nil

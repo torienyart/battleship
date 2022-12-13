@@ -2,6 +2,9 @@ require "./lib/ship"
 require "./lib/cell"
 require "./lib/board"
 require "./lib/game"
+require "./lib/2_player_game"
+require "./lib/interface"
 
-game = Game.new
-game.start
+interface = Interface.new
+
+interface.run_game
